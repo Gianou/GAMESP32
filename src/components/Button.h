@@ -7,13 +7,15 @@
 class Button : public AbstractInput
 {
 public:
-    Button(uint8_t pin);
+    Button(uint8_t pin, String name);
     void begin();
     int getValue();
+    String getName();
 
 private:
     uint8_t pin;
     int value;
+    String name;
 };
 
 #endif

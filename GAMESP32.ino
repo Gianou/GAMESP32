@@ -10,24 +10,24 @@
 
 #include "src/components/Button.h"
 #include "src/components/JoystickAxis.h"
+#include "src/managers/InputManager.h"
 
-Button buttonA = Button(BUTTON_A_PIN);
-Button buttonB = Button(BUTTON_B_PIN);
-Button buttonSW = Button(SW);
-JoystickAxis xAxis = JoystickAxis(VRX);
-JoystickAxis yAxis = JoystickAxis(VRY);
+Button buttonA = Button(BUTTON_A_PIN, "Button A");
+Button buttonB = Button(BUTTON_B_PIN, "Button B");
+Button buttonSW = Button(SW, "Button SW");
+JoystickAxis xAxis = JoystickAxis(VRX, "X axis");
+JoystickAxis yAxis = JoystickAxis(VRY, "Y axis");
 
 TFT_eSPI tft = TFT_eSPI();
+
+InputManager *inputManager = InputManager::getInstance();
 
 void setup()
 {
     Serial.begin(115200);
 
-    buttonA.begin();
-    buttonB.begin();
-    buttonSW.begin();
-    xAxis.begin(); // does nothing
-    yAxis.begin(); // does nothing
+    // Add buttons and joystick axes to the input manager
+    inputManager->addInputs({&buttonA, &buttonB, &buttonSW, &xAxis, &yAxis});
 
     tft.init();
     tft.setRotation(3);
@@ -39,11 +39,11 @@ void setup()
 
 void loop()
 {
-    Serial.print("A : " + String(buttonA.getValue()) + " | ");
-    Serial.print("B : " + String(buttonB.getValue()) + " | ");
-    Serial.println("SW : " + String(buttonSW.getValue()));
+    Serial.print("A : " + String(inputManager->getInputValue("Button A")) + " | ");
+    Serial.print("B : " + String(inputManager->getInputValue("Button B")) + " | ");
+    Serial.println("SW : " + String(inputManager->getInputValue("Button SW")));
 
-    Serial.print("X : " + String(xAxis.getValue()) + " | ");
-    Serial.println("Y : " + String(yAxis.getValue()));
+    Serial.print("X : " + String(inputManager->getInputValue("X axis")) + " | ");
+    Serial.println("Y : " + String(inputManager->getInputValue("Y axis")));
     delay(100);
 }

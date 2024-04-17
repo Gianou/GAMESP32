@@ -1,6 +1,6 @@
 #include "Button.h"
 
-Button::Button(uint8_t pin) : pin(pin) {}
+Button::Button(uint8_t pin, String name) : pin(pin), name(name) {}
 
 void Button::begin()
 {
@@ -10,4 +10,9 @@ void Button::begin()
 int Button::getValue()
 {
     return digitalRead(pin);
+}
+
+String Button::getName()
+{
+    return name;
 }
