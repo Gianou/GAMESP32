@@ -8,14 +8,21 @@
 #include <SPI.h>
 #include <TFT_eSPI.h>
 
+#include "src/components/Button.h"
+
+Button buttonA = Button(BUTTON_A_PIN);
+Button buttonB = Button(BUTTON_B_PIN);
+Button buttonSW = Button(SW);
+
 TFT_eSPI tft = TFT_eSPI();
 
 void setup()
 {
     Serial.begin(115200);
-    pinMode(BUTTON_A_PIN, INPUT_PULLUP);
-    pinMode(BUTTON_B_PIN, INPUT_PULLUP);
-    pinMode(SW, INPUT_PULLUP);
+
+    buttonA.begin();
+    buttonB.begin();
+    buttonSW.begin();
 
     tft.init();
     tft.setRotation(3);
@@ -27,12 +34,8 @@ void setup()
 
 void loop()
 {
-    Serial.print("A : " + String(digitalRead(BUTTON_A_PIN)) + " | ");
-    Serial.print("B : " + String(digitalRead(BUTTON_B_PIN)) + " | ");
-    Serial.println("SW : " + String(digitalRead(SW)));
-
-    Serial.print("X : " + String(analogRead(VRX)) + " | ");
-    Serial.println("Y : " + String(analogRead(VRY)));
-
+    Serial.print("A : " + String(buttonA.getValue()) + " | ");
+    Serial.print("B : " + String(buttonB.getValue()) + " | ");
+    Serial.println("SW : " + String(buttonSW.getValue()));
     delay(100);
 }
