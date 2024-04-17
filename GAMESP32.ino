@@ -9,10 +9,13 @@
 #include <TFT_eSPI.h>
 
 #include "src/components/Button.h"
+#include "src/components/JoystickAxis.h"
 
 Button buttonA = Button(BUTTON_A_PIN);
 Button buttonB = Button(BUTTON_B_PIN);
 Button buttonSW = Button(SW);
+JoystickAxis xAxis = JoystickAxis(VRX);
+JoystickAxis yAxis = JoystickAxis(VRY);
 
 TFT_eSPI tft = TFT_eSPI();
 
@@ -23,6 +26,8 @@ void setup()
     buttonA.begin();
     buttonB.begin();
     buttonSW.begin();
+    xAxis.begin(); // does nothing
+    yAxis.begin(); // does nothing
 
     tft.init();
     tft.setRotation(3);
@@ -37,5 +42,8 @@ void loop()
     Serial.print("A : " + String(buttonA.getValue()) + " | ");
     Serial.print("B : " + String(buttonB.getValue()) + " | ");
     Serial.println("SW : " + String(buttonSW.getValue()));
+
+    Serial.print("X : " + String(xAxis.getValue()) + " | ");
+    Serial.println("Y : " + String(yAxis.getValue()));
     delay(100);
 }
