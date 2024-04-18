@@ -5,6 +5,8 @@
 #define VRY 3
 #define SW 46
 
+#define FRAME_DURATION_MS 1000
+
 #include <SPI.h>
 #include <TFT_eSPI.h>
 
@@ -39,11 +41,22 @@ void setup()
 
 void loop()
 {
+
     Serial.print("A : " + String(inputManager->getInputValue("Button A")) + " | ");
     Serial.print("B : " + String(inputManager->getInputValue("Button B")) + " | ");
     Serial.println("SW : " + String(inputManager->getInputValue("Button SW")));
 
     Serial.print("X : " + String(inputManager->getInputValue("X axis")) + " | ");
     Serial.println("Y : " + String(inputManager->getInputValue("Y axis")));
-    delay(100);
+
+    waitUntilEndOfFrame();
+}
+
+void waitUntilEndOfFrame()
+{
+    static unsigned long lastLoop;
+    while (millis() - lastLoop < FRAME_DURATION_MS)
+    {
+    }
+    lastLoop = millis();
 }
