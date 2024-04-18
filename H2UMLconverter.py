@@ -51,6 +51,8 @@ class UMLClass:
             visibility_symbol = "+" if attr.visibility == "public" else "-"
             lines.append(f"{visibility_symbol} {attr}\n")
         
+        lines.append("_____________________\n")
+        
         for method in self.methods:
             visibility_symbol = "+" if method.visibility == "public" else "-"
             lines.append(f"{visibility_symbol} {method}\n")
@@ -106,7 +108,7 @@ def parse_header_file(file_path):
                 # Check if the line defines an attribute
                 attribute_match = attribute_regex.search(line)
                 if attribute_match:
-                    attr_name, attr_type = attribute_match.group(1), attribute_match.group(2)
+                    attr_type, attr_name = attribute_match.group(1), attribute_match.group(2)
                     classes[current_class].add_attribute(Attribute(attr_name, attr_type, visibility))
                 else:
                     # Check if the line defines a method
