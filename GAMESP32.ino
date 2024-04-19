@@ -8,11 +8,14 @@
 #define FRAME_DURATION_MS 1000
 
 #include <SPI.h>
-#include <TFT_eSPI.h>
 
 #include "src/components/Button.h"
 #include "src/components/JoystickAxis.h"
+#include "src/components/Display.h"
 #include "src/managers/InputManager.h"
+#include "src/game_engine/RenderEngine.h"
+
+// The whole inputs and outputs process is complex and could use a factory or something
 
 Button buttonA = Button(BUTTON_A_PIN, "Button A");
 Button buttonB = Button(BUTTON_B_PIN, "Button B");
@@ -20,7 +23,8 @@ Button buttonSW = Button(SW, "Button SW");
 JoystickAxis xAxis = JoystickAxis(VRX, "X axis");
 JoystickAxis yAxis = JoystickAxis(VRY, "Y axis");
 
-TFT_eSPI tft = TFT_eSPI();
+Display display = Display();
+RenderEngine renderEngine = RenderEngine();
 
 InputManager *inputManager = InputManager::getInstance();
 
@@ -31,12 +35,8 @@ void setup()
     // Add buttons and joystick axes to the input manager
     inputManager->addInputs({&buttonA, &buttonB, &buttonSW, &xAxis, &yAxis});
 
-    tft.init();
-    tft.setRotation(3);
-    tft.fillScreen(TFT_BLACK);
-    tft.setTextSize(5);
-    tft.setCursor(48, 120);
-    tft.print("Hello World!");
+    display.begin();
+    renderEngine.setDisplay(&display);
 }
 
 void loop()
@@ -48,6 +48,8 @@ void loop()
 
     Serial.print("X : " + String(inputManager->getInputValue("X axis")) + " | ");
     Serial.println("Y : " + String(inputManager->getInputValue("Y axis")));
+    renderEngine.update();
+    renderEngine.render();
 
     waitUntilEndOfFrame();
 }
