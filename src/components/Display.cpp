@@ -18,9 +18,11 @@ void Display::begin()
 
     Serial.print("Default color depth : ");
     Serial.println(sprite.getColorDepth());
-    // sprite.setColorDepth(8);
-    // Serial.print("New color depth : ");
-    // Serial.println(sprite.getColorDepth());
+    /*
+        sprite.setColorDepth(1);
+        Serial.print("New color depth : ");
+        Serial.println(sprite.getColorDepth());
+        */
 }
 
 TFT_eSPI &Display::getTFT()

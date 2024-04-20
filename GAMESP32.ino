@@ -18,6 +18,7 @@
 #include "src/game_engine/RenderEngine.h"
 #include "src/game_engine/GameEngine.h"
 #include "src/demo/DemoBounceSphere.h"
+#include "src/demo/DemoBounceImage.h"
 
 // The whole inputs and outputs process is complex and could use a factory or something
 
@@ -44,6 +45,7 @@ int initialY = screenHeight / 2; // Center Y position
 
 // Instantiate the DemoBounceSphere object
 DemoBounceSphere bounceSphere = DemoBounceSphere(radius, initialX, initialY, speedX, speedY, screenWidth, screenHeight);
+DemoBounceImage bounceImage = DemoBounceImage(90, 90, initialX, initialY, speedX, speedY, screenWidth, screenHeight);
 
 void setup()
 {
@@ -54,6 +56,7 @@ void setup()
 
     display.begin();
     gameEngine.addGameObject(&bounceSphere);
+    // gameEngine.addGameObject(&bounceImage);
     gameEngine.addGameObject(&renderEngine); // Should be last in the array I think
 
     Serial.println("[Test] Width: " + String(SCREEN_WIDTH) + "Height: 0" + String(SCREEN_HEIGHT));
@@ -68,7 +71,7 @@ void loop()
 
     unsigned long endTime = millis();
     unsigned long duration = endTime - startTime;
-    Serial.print("Loop iteration duration: " + String(duration) + "ms");
+    Serial.println("Loop iteration duration: " + String(duration) + "ms");
 }
 
 void waitUntilEndOfFrame()
