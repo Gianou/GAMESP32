@@ -8,11 +8,11 @@ void GameEngine::update()
     }
 }
 
-void GameEngine::render()
+void GameEngine::render(TFT_eSprite &sprite)
 {
     for (AbstractGameObject *gameObject : gameObjects)
     {
-        gameObject->render();
+        gameObject->render(sprite);
     }
 }
 

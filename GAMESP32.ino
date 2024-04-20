@@ -5,7 +5,9 @@
 #define VRY 3
 #define SW 46
 
-#define FRAME_DURATION_MS 1000
+#define FRAME_DURATION_MS 33
+#define SCREEN_WIDTH 480
+#define SCREEN_HEIGHT 320
 
 #include <SPI.h>
 
@@ -14,6 +16,8 @@
 #include "src/components/Display.h"
 #include "src/managers/InputManager.h"
 #include "src/game_engine/RenderEngine.h"
+#include "src/game_engine/GameEngine.h"
+#include "src/demo/DemoBounceSphere.h"
 
 // The whole inputs and outputs process is complex and could use a factory or something
 
@@ -23,10 +27,23 @@ Button buttonSW = Button(SW, "Button SW");
 JoystickAxis xAxis = JoystickAxis(VRX, "X axis");
 JoystickAxis yAxis = JoystickAxis(VRY, "Y axis");
 
-Display display = Display();
+Display display = Display(SCREEN_WIDTH, SCREEN_HEIGHT);
 RenderEngine renderEngine = RenderEngine();
+GameEngine gameEngine = GameEngine();
 
 InputManager *inputManager = InputManager::getInstance();
+
+// Define initial parameters for the DemoBounceSphere
+int radius = 20;
+int speedX = 2;
+int speedY = 2;
+int screenWidth = SCREEN_WIDTH;
+int screenHeight = SCREEN_HEIGHT;
+int initialX = screenWidth / 2;  // Center X position
+int initialY = screenHeight / 2; // Center Y position
+
+// Instantiate the DemoBounceSphere object
+DemoBounceSphere bounceSphere = DemoBounceSphere(radius, initialX, initialY, speedX, speedY, screenWidth, screenHeight);
 
 void setup()
 {
@@ -36,22 +53,27 @@ void setup()
     inputManager->addInputs({&buttonA, &buttonB, &buttonSW, &xAxis, &yAxis});
 
     display.begin();
-    renderEngine.setDisplay(&display);
+    gameEngine.addGameObject(&bounceSphere);
+    gameEngine.addGameObject(&renderEngine); // Should be last in the array I think
 }
 
 void loop()
 {
+    // Record the start time of the loop iteration
+    unsigned long startTime = millis();
 
-    Serial.print("A : " + String(inputManager->getInputValue("Button A")) + " | ");
-    Serial.print("B : " + String(inputManager->getInputValue("Button B")) + " | ");
-    Serial.println("SW : " + String(inputManager->getInputValue("Button SW")));
+    // Your loop code goes here
+    gameEngine.update();
+    gameEngine.render(display.getSprite());
 
-    Serial.print("X : " + String(inputManager->getInputValue("X axis")) + " | ");
-    Serial.println("Y : " + String(inputManager->getInputValue("Y axis")));
-    renderEngine.update();
-    renderEngine.render();
-
-    waitUntilEndOfFrame();
+    // Record the end time of the loop iteration
+    unsigned long endTime = millis();
+    // Calculate the duration of the loop iteration
+    unsigned long duration = endTime - startTime;
+    // Print the duration to the serial monitor
+    Serial.print("Loop iteration duration: ");
+    Serial.print(duration);
+    Serial.println(" milliseconds");
 }
 
 void waitUntilEndOfFrame()

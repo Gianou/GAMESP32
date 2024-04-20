@@ -1,6 +1,7 @@
 #include "Display.h"
 
-Display::Display() : tft(TFT_eSPI()), sprite(&tft)
+Display::Display(int width, int height)
+    : width(width), height(height), tft(TFT_eSPI()), sprite(&tft)
 {
 }
 
@@ -13,7 +14,13 @@ void Display::begin()
     tft.setCursor(48, 120);
     tft.print("GAMESP32");
 
-    sprite.createSprite(480, 320);
+    sprite.createSprite(width, height);
+
+    Serial.print("Default color depth : ");
+    Serial.println(sprite.getColorDepth());
+    // sprite.setColorDepth(8);
+    // Serial.print("New color depth : ");
+    // Serial.println(sprite.getColorDepth());
 }
 
 TFT_eSPI &Display::getTFT()

@@ -4,16 +4,12 @@ RenderEngine::RenderEngine()
 {
 }
 
-void RenderEngine::setDisplay(Display *display)
-{
-    this->display = display;
-}
-
 void RenderEngine::update()
 {
 }
 
-void RenderEngine::render()
+void RenderEngine::render(TFT_eSprite &sprite)
 {
-    display->getSprite().pushSprite(0, 0); // reset screen
+    sprite.pushSprite(0, 0);
+    sprite.fillSprite(TFT_BLACK);
 }

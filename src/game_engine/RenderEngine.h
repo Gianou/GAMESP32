@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <TFT_eSPI.h>
 #include "AbstractGameObject.h"
 #include "../components/Display.h"
 
@@ -10,12 +11,10 @@ class RenderEngine : public AbstractGameObject
 {
 public:
     RenderEngine();
-    void update();
-    void render();
-    void setDisplay(Display* display);
+    void update() override;
+    void render(TFT_eSprite &sprite) override;
 
 private:
-    Display *display;
 };
 
 #endif

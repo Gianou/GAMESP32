@@ -6,7 +6,7 @@
 class Display
 {
 public:
-    Display();
+    Display(int width, int height);
     void begin();
     TFT_eSPI &getTFT();
     TFT_eSprite &getSprite();
@@ -14,6 +14,8 @@ public:
 private:
     TFT_eSPI tft;
     TFT_eSprite sprite;
+    int width;
+    int height;
 };
 
 #endif
