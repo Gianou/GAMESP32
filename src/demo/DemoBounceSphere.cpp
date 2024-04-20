@@ -24,9 +24,6 @@ void DemoBounceSphere::update()
 
 void DemoBounceSphere::render(TFT_eSprite &sprite)
 {
-    // Clear previous rendering
-    // sprite.fillCircle(x, y, radius + 1, TFT_BLACK);
-
     // Draw the sphere
     sprite.fillCircle(x, y, radius, TFT_WHITE);
 }

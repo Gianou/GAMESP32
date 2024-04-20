@@ -55,25 +55,20 @@ void setup()
     display.begin();
     gameEngine.addGameObject(&bounceSphere);
     gameEngine.addGameObject(&renderEngine); // Should be last in the array I think
+
+    Serial.println("[Test] Width: " + String(SCREEN_WIDTH) + "Height: 0" + String(SCREEN_HEIGHT));
 }
 
 void loop()
 {
-    // Record the start time of the loop iteration
     unsigned long startTime = millis();
 
-    // Your loop code goes here
     gameEngine.update();
     gameEngine.render(display.getSprite());
 
-    // Record the end time of the loop iteration
     unsigned long endTime = millis();
-    // Calculate the duration of the loop iteration
     unsigned long duration = endTime - startTime;
-    // Print the duration to the serial monitor
-    Serial.print("Loop iteration duration: ");
-    Serial.print(duration);
-    Serial.println(" milliseconds");
+    Serial.print("Loop iteration duration: " + String(duration) + "ms");
 }
 
 void waitUntilEndOfFrame()
