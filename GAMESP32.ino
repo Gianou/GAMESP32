@@ -52,19 +52,20 @@ int counter = 0;
 void setup()
 {
     Serial.begin(115200);
-
+    /* No difference
+    SPI.begin();
+    SPI.setClockDivider(SPI_CLOCK_DIV2);
+*/
     inputManager->addInputs({&buttonA, &buttonB, &buttonSW, &xAxis, &yAxis});
 
     display.begin();
     gameEngine.addGameObject(&bounceSphere);
-
-    gameEngine.addGameObject(&bounceSphere1);
-
-    gameEngine.addGameObject(&bounceSphere2);
-    gameEngine.addGameObject(&bounceSphere3);
     /*
-    gameEngine.addGameObject(&bounceSphere4);
-    */
+        gameEngine.addGameObject(&bounceSphere1);
+        gameEngine.addGameObject(&bounceSphere2);
+        gameEngine.addGameObject(&bounceSphere3);
+        gameEngine.addGameObject(&bounceSphere4);
+        */
     gameEngine.addGameObject(&renderEngine);
 
     Serial.println("[Test] Width: " + String(SCREEN_WIDTH) + "Height: 0" + String(SCREEN_HEIGHT));

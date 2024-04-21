@@ -14,16 +14,33 @@ void Display::begin()
     tft.setCursor(48, 120);
     tft.print("GAMESP32");
 
-    // tft.getSPIinstance
+    Serial.print("TFT PSRAM enabled : ");
+    /* Doesnt ever return enable true
+    Serial.print("TFT PSRAM enabled : ");
+    Serial.println(tft.getAttribute(PSRAM_ENABLE));
+    tft.setAttribute(PSRAM_ENABLE, true);
+    Serial.print("TFT PSRAM enabled : ");
+    Serial.println(tft.getAttribute(PSRAM_ENABLE));
+    */
 
-    sprite.createSprite(80, 80);
+    sprite.createSprite(width, height);
 
     Serial.print("Default color depth : ");
     Serial.println(sprite.getColorDepth());
 
-    sprite.setColorDepth(1);
-    Serial.print("New color depth : ");
-    Serial.println(sprite.getColorDepth());
+    /* Disabling the PSRAM did not change anything
+        Serial.print("PSRAM enabled : ");
+        Serial.println(sprite.getAttribute(PSRAM_ENABLE));
+        sprite.setAttribute(PSRAM_ENABLE, false);
+        Serial.print("PSRAM enabled : ");
+        Serial.println(sprite.getAttribute(PSRAM_ENABLE));
+        */
+
+    /*
+        sprite.setColorDepth(1);
+        Serial.print("New color depth : ");
+        Serial.println(sprite.getColorDepth());
+        */
 }
 
 TFT_eSPI &Display::getTFT()
