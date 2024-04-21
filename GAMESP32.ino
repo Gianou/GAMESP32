@@ -20,8 +20,6 @@
 #include "src/demo/DemoBounceSphere.h"
 #include "src/demo/DemoBounceImage.h"
 
-// The whole inputs and outputs process is complex and could use a factory or something
-
 Button buttonA = Button(BUTTON_A_PIN, "Button A");
 Button buttonB = Button(BUTTON_B_PIN, "Button B");
 Button buttonSW = Button(SW, "Button SW");
@@ -34,30 +32,40 @@ GameEngine gameEngine = GameEngine();
 
 InputManager *inputManager = InputManager::getInstance();
 
-// Define initial parameters for the DemoBounceSphere
-int radius = 20;
-int speedX = 2;
-int speedY = 2;
+int radius = 40;
+int speedX = 10;
+int speedY = 10;
 int screenWidth = SCREEN_WIDTH;
 int screenHeight = SCREEN_HEIGHT;
-int initialX = screenWidth / 2;  // Center X position
-int initialY = screenHeight / 2; // Center Y position
+int initialX = screenWidth / 2;
+int initialY = screenHeight / 2;
 
-// Instantiate the DemoBounceSphere object
 DemoBounceSphere bounceSphere = DemoBounceSphere(radius, initialX, initialY, speedX, speedY, screenWidth, screenHeight);
+DemoBounceSphere bounceSphere1 = DemoBounceSphere(radius, initialX - 2 * radius, initialY - 2 * radius, speedX, speedY, screenWidth, screenHeight);
+DemoBounceSphere bounceSphere2 = DemoBounceSphere(radius, initialX - 4 * radius, initialY - 4 * radius, speedX, speedY, screenWidth, screenHeight);
+DemoBounceSphere bounceSphere3 = DemoBounceSphere(radius, initialX + 2 * radius, initialY + 2 * radius, speedX, speedY, screenWidth, screenHeight);
+DemoBounceSphere bounceSphere4 = DemoBounceSphere(radius, initialX + 4 * radius, initialY + 4 * radius, speedX, speedY, screenWidth, screenHeight);
+
 DemoBounceImage bounceImage = DemoBounceImage(90, 90, initialX, initialY, speedX, speedY, screenWidth, screenHeight);
+int counter = 0;
 
 void setup()
 {
     Serial.begin(115200);
 
-    // Add buttons and joystick axes to the input manager
     inputManager->addInputs({&buttonA, &buttonB, &buttonSW, &xAxis, &yAxis});
 
     display.begin();
     gameEngine.addGameObject(&bounceSphere);
-    // gameEngine.addGameObject(&bounceImage);
-    gameEngine.addGameObject(&renderEngine); // Should be last in the array I think
+
+    gameEngine.addGameObject(&bounceSphere1);
+
+    gameEngine.addGameObject(&bounceSphere2);
+    gameEngine.addGameObject(&bounceSphere3);
+    /*
+    gameEngine.addGameObject(&bounceSphere4);
+    */
+    gameEngine.addGameObject(&renderEngine);
 
     Serial.println("[Test] Width: " + String(SCREEN_WIDTH) + "Height: 0" + String(SCREEN_HEIGHT));
 }

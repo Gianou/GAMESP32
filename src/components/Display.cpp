@@ -14,15 +14,16 @@ void Display::begin()
     tft.setCursor(48, 120);
     tft.print("GAMESP32");
 
-    sprite.createSprite(width, height);
+    // tft.getSPIinstance
+
+    sprite.createSprite(80, 80);
 
     Serial.print("Default color depth : ");
     Serial.println(sprite.getColorDepth());
-    /*
-        sprite.setColorDepth(1);
-        Serial.print("New color depth : ");
-        Serial.println(sprite.getColorDepth());
-        */
+
+    sprite.setColorDepth(1);
+    Serial.print("New color depth : ");
+    Serial.println(sprite.getColorDepth());
 }
 
 TFT_eSPI &Display::getTFT()

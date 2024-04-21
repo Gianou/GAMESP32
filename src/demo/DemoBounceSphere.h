@@ -10,7 +10,7 @@ public:
     void update() override;
     void render(TFT_eSprite &sprite) override;
 
-private:
+    // private:
     int radius;
     int x;
     int y;
