@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
     folder_path = sys.argv[1]
 
-    output_file = "output.txt"  # Output file name
+    output_file = "FolderToTxt_output.txt"
 
     merge_files(folder_path, output_file)
 
