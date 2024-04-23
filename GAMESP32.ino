@@ -6,8 +6,8 @@
 #define SW 46
 
 #define FRAME_DURATION_MS 33
-#define SCREEN_WIDTH 480
-#define SCREEN_HEIGHT 320
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
 
 #include <SPI.h>
 
@@ -32,19 +32,15 @@ GameEngine gameEngine = GameEngine();
 
 InputManager *inputManager = InputManager::getInstance();
 
-int radius = 40;
-int speedX = 10;
-int speedY = 10;
+int radius = 8;
+int speedX = 1;
+int speedY = 1;
 int screenWidth = SCREEN_WIDTH;
 int screenHeight = SCREEN_HEIGHT;
 int initialX = screenWidth / 2;
 int initialY = screenHeight / 2;
 
 DemoBounceSphere bounceSphere = DemoBounceSphere(radius, initialX, initialY, speedX, speedY, screenWidth, screenHeight);
-DemoBounceSphere bounceSphere1 = DemoBounceSphere(radius, initialX - 2 * radius, initialY - 2 * radius, speedX, speedY, screenWidth, screenHeight);
-DemoBounceSphere bounceSphere2 = DemoBounceSphere(radius, initialX - 4 * radius, initialY - 4 * radius, speedX, speedY, screenWidth, screenHeight);
-DemoBounceSphere bounceSphere3 = DemoBounceSphere(radius, initialX + 2 * radius, initialY + 2 * radius, speedX, speedY, screenWidth, screenHeight);
-DemoBounceSphere bounceSphere4 = DemoBounceSphere(radius, initialX + 4 * radius, initialY + 4 * radius, speedX, speedY, screenWidth, screenHeight);
 
 DemoBounceImage bounceImage = DemoBounceImage(90, 90, initialX, initialY, speedX, speedY, screenWidth, screenHeight);
 int counter = 0;
@@ -52,23 +48,11 @@ int counter = 0;
 void setup()
 {
     Serial.begin(115200);
-    /* No difference
-    SPI.begin();
-    SPI.setClockDivider(SPI_CLOCK_DIV2);
-*/
     inputManager->addInputs({&buttonA, &buttonB, &buttonSW, &xAxis, &yAxis});
 
     display.begin();
     gameEngine.addGameObject(&bounceSphere);
-    /*
-        gameEngine.addGameObject(&bounceSphere1);
-        gameEngine.addGameObject(&bounceSphere2);
-        gameEngine.addGameObject(&bounceSphere3);
-        gameEngine.addGameObject(&bounceSphere4);
-        */
     gameEngine.addGameObject(&renderEngine);
-
-    Serial.println("[Test] Width: " + String(SCREEN_WIDTH) + "Height: 0" + String(SCREEN_HEIGHT));
 }
 
 void loop()
