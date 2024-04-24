@@ -18,7 +18,6 @@
 #include "src/game_engine/RenderEngine.h"
 #include "src/game_engine/GameEngine.h"
 #include "src/demo/DemoBounceSphere.h"
-#include "src/demo/DemoBounceImage.h"
 
 Button buttonA = Button(BUTTON_A_PIN, "Button A");
 Button buttonB = Button(BUTTON_B_PIN, "Button B");
@@ -41,8 +40,6 @@ int initialX = screenWidth / 2;
 int initialY = screenHeight / 2;
 
 DemoBounceSphere bounceSphere = DemoBounceSphere(radius, initialX, initialY, speedX, speedY, screenWidth, screenHeight);
-
-DemoBounceImage bounceImage = DemoBounceImage(90, 90, initialX, initialY, speedX, speedY, screenWidth, screenHeight);
 int counter = 0;
 
 void setup()
