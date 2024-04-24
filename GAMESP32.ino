@@ -17,7 +17,9 @@
 #include "src/managers/InputManager.h"
 #include "src/game_engine/RenderEngine.h"
 #include "src/game_engine/GameEngine.h"
+
 #include "src/demo/DemoBounceSphere.h"
+#include "src/demo/DemoPaddle.h"
 
 Button buttonA = Button(BUTTON_A_PIN, "Button A");
 Button buttonB = Button(BUTTON_B_PIN, "Button B");
@@ -31,16 +33,23 @@ GameEngine gameEngine = GameEngine();
 
 InputManager *inputManager = InputManager::getInstance();
 
-int radius = 8;
+// DemoBounceSphere
+int radius = 4;
 int speedX = 1;
 int speedY = 1;
 int screenWidth = SCREEN_WIDTH;
 int screenHeight = SCREEN_HEIGHT;
 int initialX = screenWidth / 2;
 int initialY = screenHeight / 2;
-
 DemoBounceSphere bounceSphere = DemoBounceSphere(radius, initialX, initialY, speedX, speedY, screenWidth, screenHeight);
-int counter = 0;
+
+// DemoPaddle
+int paddleX = 12;
+int paddleY = 12;
+int paddleWidth = 4;
+int paddleHeight = 20;
+int paddleSpeed = 4;
+DemoPaddle paddle = DemoPaddle(paddleX, paddleY, paddleWidth, paddleHeight, paddleSpeed);
 
 void setup()
 {
@@ -49,6 +58,7 @@ void setup()
 
     display.begin();
     gameEngine.addGameObject(&bounceSphere);
+    gameEngine.addGameObject(&paddle);
     gameEngine.addGameObject(&renderEngine);
 }
 
