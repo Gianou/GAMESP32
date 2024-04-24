@@ -89,13 +89,14 @@ def parse_header_file(file_path):
     class_regex = re.compile(r'class\s+(\w+)\s*:?(\s*{)?')
 
     # Define regular expressions to match attribute and method definitions
-    attribute_regex = re.compile(r'(\w+)\s+(\w+)\s*;')
-    method_regex = re.compile(r'(\w+)\s+(\w+)\s*\([^)]*\)\s*;')
+    attribute_regex = re.compile(r'(\w+)\s+(\w+)\s*;') #regular
+    #attribute_regex = re.compile(r'(\w+::)?\w+<.*>\s+(\w+)\s*;') #std
+    method_regex = re.compile(r'(\w+)\s+(\w+)\s*\([^)]*\)\s*(override)?\s*;')
 
     # Dictionary to store UMLClass objects
     classes = {}
 
-    with open(file_path, 'r') as file:
+    with open(file_path, 'r') as file:  
         current_class = None
         visibility = "private"  # Default visibility
         for line in file:
