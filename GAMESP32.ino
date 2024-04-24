@@ -1,15 +1,6 @@
-#define BUTTON_A_PIN 37
-#define BUTTON_B_PIN 21
-
-#define VRX 8
-#define VRY 3
-#define SW 46
-
-#define FRAME_DURATION_MS 33
-#define SCREEN_WIDTH 128
-#define SCREEN_HEIGHT 64
-
 #include <SPI.h>
+
+#include "config/Constants.h"
 
 #include "src/components/Button.h"
 #include "src/components/JoystickAxis.h"
@@ -37,11 +28,9 @@ InputManager *inputManager = InputManager::getInstance();
 int radius = 4;
 int speedX = 1;
 int speedY = 1;
-int screenWidth = SCREEN_WIDTH;
-int screenHeight = SCREEN_HEIGHT;
-int initialX = screenWidth / 2;
-int initialY = screenHeight / 2;
-DemoBounceSphere bounceSphere = DemoBounceSphere(radius, initialX, initialY, speedX, speedY, screenWidth, screenHeight);
+int initialX = SCREEN_WIDTH / 2;
+int initialY = SCREEN_HEIGHT / 2;
+DemoBounceSphere bounceSphere = DemoBounceSphere(radius, initialX, initialY, speedX, speedY);
 
 // DemoPaddle
 int paddleX = 12;

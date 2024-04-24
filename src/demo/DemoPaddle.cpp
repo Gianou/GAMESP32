@@ -16,6 +16,15 @@ void DemoPaddle::update()
     {
         y -= speed;
     }
+    // Check for screen boundaries
+    if (y < 0)
+    {
+        y = 0;
+    }
+    if (y + height > SCREEN_HEIGHT)
+    {
+        y = SCREEN_HEIGHT - height;
+    }
 }
 void DemoPaddle::render(TFT_eSprite &sprite)
 {

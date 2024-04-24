@@ -2,11 +2,12 @@
 #define DEMO_BOUNCE_SPHERE_H
 
 #include "../game_engine/AbstractGameObject.h"
+#include "../../config/Constants.h"
 
 class DemoBounceSphere : public AbstractGameObject
 {
 public:
-    DemoBounceSphere(int radius, int initialX, int initialY, int speedX, int speedY, int screenWidth, int screenHeight);
+    DemoBounceSphere(int radius, int initialX, int initialY, int speedX, int speedY);
     void update() override;
     void render(TFT_eSprite &sprite) override;
 
@@ -16,8 +17,6 @@ public:
     int y;
     int speedX;
     int speedY;
-    int screenWidth;
-    int screenHeight;
 };
 
 #endif

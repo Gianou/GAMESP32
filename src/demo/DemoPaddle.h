@@ -3,6 +3,7 @@
 
 #include "../game_engine/AbstractGameObject.h"
 #include "../managers/InputManager.h"
+#include "../../config/Constants.h"
 
 class DemoPaddle : public AbstractGameObject
 {

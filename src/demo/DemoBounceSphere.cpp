@@ -1,7 +1,7 @@
 #include "DemoBounceSphere.h"
 
-DemoBounceSphere::DemoBounceSphere(int radius, int initialX, int initialY, int speedX, int speedY, int screenWidth, int screenHeight)
-    : radius(radius), x(initialX), y(initialY), speedX(speedX), speedY(speedY), screenWidth(screenWidth), screenHeight(screenHeight)
+DemoBounceSphere::DemoBounceSphere(int radius, int initialX, int initialY, int speedX, int speedY)
+    : radius(radius), x(initialX), y(initialY), speedX(speedX), speedY(speedY)
 {
 }
 
@@ -12,11 +12,11 @@ void DemoBounceSphere::update()
     y += speedY;
 
     // Check bounds and bounce if necessary
-    if (x - radius < 0 || x + radius > screenWidth)
+    if (x - radius < 0 || x + radius > SCREEN_WIDTH)
     {
         speedX = -speedX;
     }
-    if (y - radius < 0 || y + radius > screenHeight)
+    if (y - radius < 0 || y + radius > SCREEN_HEIGHT)
     {
         speedY = -speedY;
     }
