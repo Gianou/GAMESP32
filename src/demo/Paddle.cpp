@@ -1,11 +1,11 @@
-#include "DemoPaddle.h"
+#include "Paddle.h"
 
-DemoPaddle::DemoPaddle(int x, int y, int width, int height, int speed)
+Paddle::Paddle(int x, int y, int width, int height, int speed)
     : x(x), y(y), width(width), height(height), speed(speed)
 {
 }
 
-void DemoPaddle::update()
+void Paddle::update()
 {
     InputManager *inputManager = InputManager::getInstance();
     if (inputManager->getInputValue("Y axis") > 2000)
@@ -26,7 +26,7 @@ void DemoPaddle::update()
         y = SCREEN_HEIGHT - height;
     }
 }
-void DemoPaddle::render(TFT_eSprite &sprite)
+void Paddle::render(TFT_eSprite &sprite)
 {
     sprite.fillRect(x, y, width, height, TFT_WHITE);
 }

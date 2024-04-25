@@ -1,14 +1,14 @@
-#ifndef Demo_Paddle_H
-#define Demo_Paddle_H
+#ifndef Paddle_H
+#define Paddle_H
 
 #include "../game_engine/AbstractGameObject.h"
 #include "../managers/InputManager.h"
 #include "../../config/Constants.h"
 
-class DemoPaddle : public AbstractGameObject
+class Paddle : public AbstractGameObject
 {
 public:
-    DemoPaddle(int x, int y, int width, int height, int speed);
+    Paddle(int x, int y, int width, int height, int speed);
     void update() override;
     void render(TFT_eSprite &sprite) override;
 

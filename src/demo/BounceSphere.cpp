@@ -1,11 +1,11 @@
-#include "DemoBounceSphere.h"
+#include "BounceSphere.h"
 
-DemoBounceSphere::DemoBounceSphere(int radius, int initialX, int initialY, int speedX, int speedY)
+BounceSphere::BounceSphere(int radius, int initialX, int initialY, int speedX, int speedY)
     : radius(radius), x(initialX), y(initialY), speedX(speedX), speedY(speedY)
 {
 }
 
-void DemoBounceSphere::update()
+void BounceSphere::update()
 {
     // Update position based on speed
     x += speedX;
@@ -22,7 +22,7 @@ void DemoBounceSphere::update()
     }
 }
 
-void DemoBounceSphere::render(TFT_eSprite &sprite)
+void BounceSphere::render(TFT_eSprite &sprite)
 {
     // Draw the sphere with 1 sprite per
     sprite.fillCircle(x, y, radius, TFT_WHITE);
