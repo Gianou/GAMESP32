@@ -1,7 +1,6 @@
 #ifndef Collision_Detector_H
 #define Collision_Detector_H
 
-#include "AbstractRigidBody.h"
 #include "AbstractGameObject.h"
 #include <vector>
 
@@ -9,8 +8,8 @@ class CollisionDetector
 {
 public:
     CollisionDetector();
-    boolean detectCollisions(AbstractRigidBody gameObject);
-    boolean checkCollision(AbstractRigidBody callerGameObject, AbstractRigidBody gameObject);
+    boolean detectCollisions(AbstractGameObject gameObject);
+    boolean checkCollision(AbstractGameObject *callerGameObject, AbstractGameObject *gameObject);
     // For now, just a boolean
 
     // For later

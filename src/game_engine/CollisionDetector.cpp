@@ -2,41 +2,49 @@
 
 CollisionDetector::CollisionDetector() {}
 
-boolean detectCollisions(AbstractRigidBody gameObject)
+boolean CollisionDetector::detectCollisions(AbstractGameObject gameObject)
 {
     return false;
 }
 
-bool checkCollision(AbstractRigidBody callerGameObject, AbstractRigidBody gameObject)
+boolean CollisionDetector::checkCollision(AbstractGameObject *callerGameObject, AbstractGameObject *gameObject)
 {
+    // return false;
+    if (!callerGameObject->getRigidBody() || !gameObject->getRigidBody())
+    {
+        Serial.println("Test 1");
+        return false;
+    }
 
     // Check if callerGameObject and gameObject are the same object
-    if (&callerGameObject == &gameObject)
+    if (callerGameObject == gameObject)
     {
         // They are the same object, so no collision
+        Serial.println("Test 2");
+
         return false;
     }
 
     // Calculate the bounding boxes for both objects
-    int callerLeft = callerGameObject.getX();
-    int callerRight = callerGameObject.getX() + callerGameObject.getWidth();
-    int callerTop = callerGameObject.getY();
-    int callerBottom = callerGameObject.getY() + callerGameObject.getHeight();
+    int callerLeft = callerGameObject->getRigidBody()->getX();
+    int callerRight = callerGameObject->getRigidBody()->getX() + callerGameObject->getRigidBody()->getWidth();
+    int callerTop = callerGameObject->getRigidBody()->getY();
+    int callerBottom = callerGameObject->getRigidBody()->getY() + callerGameObject->getRigidBody()->getHeight();
 
-    int objectLeft = gameObject.getX();
-    int objectRight = gameObject.getX() + gameObject.getWidth();
-    int objectTop = gameObject.getY();
-    int objectBottom = gameObject.getY() + gameObject.getHeight();
+    int objectLeft = gameObject->getRigidBody()->getX();
+    int objectRight = gameObject->getRigidBody()->getX() + gameObject->getRigidBody()->getWidth();
+    int objectTop = gameObject->getRigidBody()->getY();
+    int objectBottom = gameObject->getRigidBody()->getY() + gameObject->getRigidBody()->getHeight();
 
     // Check for collision using Axis-Aligned Bounding Box (AABB) method
     if (callerRight >= objectLeft && callerLeft <= objectRight && callerBottom >= objectTop && callerTop <= objectBottom)
     {
+        Serial.println("Collision detected");
+
         // Collision detected
         return true;
     }
-    else
-    {
-        // No collision detected
-        return false;
-    }
+    Serial.println("End of function, returns false");
+
+    return false;
 }

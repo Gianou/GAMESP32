@@ -5,12 +5,10 @@
 #include "../game_engine/GameScene.h"
 #include "../game_engine/CollisionDetector.h"
 #include "../game_engine/AbstractGameSceneAware.h"
-#include "../game_engine/AbstractRigidBody.h"
 #include "../../config/Constants.h"
 
 class BounceSphere : public AbstractGameObject,
-                     public AbstractGameSceneAware,
-                     public AbstractRigidBody
+                     public AbstractGameSceneAware
 {
 public:
     BounceSphere(int radius, int initialX, int initialY, int speedX, int speedY);
@@ -20,10 +18,7 @@ public:
     void setParentScene(GameScene *parent);
     GameScene *getParentScene();
 
-    int getX() override { return x; }
-    int getY() override { return y; }
-    int getWidth() override { return radius * 2; }
-    int getHeight() override { return radius * 2; }
+    RigidBody *getRigidBody() override { return rigidBody; };
 
 private:
     int radius;
@@ -33,6 +28,7 @@ private:
     int speedY;
 
     GameScene *parent;
+    RigidBody *rigidBody;
 };
 
 #endif

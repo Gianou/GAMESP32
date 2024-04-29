@@ -2,6 +2,7 @@
 #define Abstract_Game_Scene_Aware_H
 
 #include "GameScene.h"
+#include "RigidBody.h"
 
 class AbstractGameSceneAware
 {

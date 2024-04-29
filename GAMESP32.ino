@@ -50,6 +50,8 @@ void setup()
     display.begin();
     gameScene.addGameObject(&bounceSphere);
     gameScene.addGameObject(&paddle);
+    bounceSphere.setParentScene(&gameScene);
+    // paddle.setParentScene(&gameScene);
 
     gameEngine.addGameObject(&gameScene);
     gameEngine.addGameObject(&renderEngine);

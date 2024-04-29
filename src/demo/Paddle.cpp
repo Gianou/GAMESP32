@@ -3,6 +3,7 @@
 Paddle::Paddle(int x, int y, int width, int height, int speed)
     : x(x), y(y), width(width), height(height), speed(speed)
 {
+    rigidBody = new RigidBody(x, y, width, height);
 }
 
 void Paddle::update()
@@ -25,6 +26,10 @@ void Paddle::update()
     {
         y = SCREEN_HEIGHT - height;
     }
+
+    // Update rigidBody place
+    rigidBody->setX(x);
+    rigidBody->setY(y);
 }
 
 void Paddle::render(TFT_eSprite &sprite)
