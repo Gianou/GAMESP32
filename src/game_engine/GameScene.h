@@ -1,24 +1,26 @@
-#ifndef Game_Engine_H
-#define Game_Engine_H
+#ifndef Game_Scene_H
+#define Game_Scene_H
 
-#include <vector>
-#include <algorithm>
-#include <TFT_eSPI.h>
 #include "AbstractGameObject.h"
 #include "AbstractCompositGameObject.h"
+#include "CollisionDetector.h"
 
-class GameEngine : public AbstractGameObject,
-                   public AbstractCompositeGameObject
+class GameScene : public AbstractGameObject,
+                  public AbstractCompositeGameObject
+// HasCollisionDetector interface?
 {
 public:
+    GameScene();
     void update() override;
     void render(TFT_eSprite &sprite) override;
     void addGameObject(AbstractGameObject *gameObject) override;
     void removeGameObject(AbstractGameObject *gameObject) override;
     std::vector<AbstractGameObject *> getChildren() override;
+    CollisionDetector getCollisionDetector();
 
 private:
     std::vector<AbstractGameObject *> gameObjects;
+    CollisionDetector collisionDetector;
 };
 
 #endif

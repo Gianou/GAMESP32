@@ -26,6 +26,7 @@ void Paddle::update()
         y = SCREEN_HEIGHT - height;
     }
 }
+
 void Paddle::render(TFT_eSprite &sprite)
 {
     sprite.fillRect(x, y, width, height, TFT_WHITE);

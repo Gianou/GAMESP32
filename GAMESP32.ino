@@ -8,6 +8,7 @@
 #include "src/managers/InputManager.h"
 #include "src/game_engine/RenderEngine.h"
 #include "src/game_engine/GameEngine.h"
+#include "src/game_engine/GameScene.h"
 
 #include "src/demo/BounceSphere.h"
 #include "src/demo/Paddle.h"
@@ -20,6 +21,7 @@ JoystickAxis yAxis = JoystickAxis(VRY, "Y axis");
 
 Display display = Display(SCREEN_WIDTH, SCREEN_HEIGHT);
 RenderEngine renderEngine = RenderEngine();
+GameScene gameScene = GameScene();
 GameEngine gameEngine = GameEngine();
 
 InputManager *inputManager = InputManager::getInstance();
@@ -46,8 +48,10 @@ void setup()
     inputManager->addInputs({&buttonA, &buttonB, &buttonSW, &xAxis, &yAxis});
 
     display.begin();
-    gameEngine.addGameObject(&bounceSphere);
-    gameEngine.addGameObject(&paddle);
+    gameScene.addGameObject(&bounceSphere);
+    gameScene.addGameObject(&paddle);
+
+    gameEngine.addGameObject(&gameScene);
     gameEngine.addGameObject(&renderEngine);
 }
 
