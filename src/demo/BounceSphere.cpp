@@ -30,13 +30,13 @@ void BounceSphere::update()
         speedY = -speedY;
     }
     // Check for collisions
-    CollisionDetector collisionDetector = getParentScene()->getCollisionDetector();
+    CollisionDetector *collisionDetector = getParentScene()->getCollisionDetector();
     std::vector<AbstractGameObject *> sceneGameObjects = getParentScene()->getChildren();
     for (AbstractGameObject *gameObject : sceneGameObjects)
     {
 
         // Check collision between the paddle and each game object
-        if (collisionDetector.checkCollision(this, gameObject))
+        if (collisionDetector->checkCollision(this, gameObject))
         {
             speedX = -speedX;
             speedY = -speedY;

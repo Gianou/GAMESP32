@@ -1,12 +1,12 @@
-#include "Paddle.h"
+#include "PaddleLeft.h"
 
-Paddle::Paddle(int x, int y, int width, int height, int speed)
+PaddleLeft::PaddleLeft(int x, int y, int width, int height, int speed)
     : x(x), y(y), width(width), height(height), speed(speed)
 {
     rigidBody = new RigidBody(x, y, width, height);
 }
 
-void Paddle::update()
+void PaddleLeft::update()
 {
     InputManager *inputManager = InputManager::getInstance();
     if (inputManager->getInputValue("Y axis") > 2000)
@@ -32,7 +32,7 @@ void Paddle::update()
     rigidBody->setY(y);
 }
 
-void Paddle::render(TFT_eSprite &sprite)
+void PaddleLeft::render(TFT_eSprite &sprite)
 {
     sprite.fillRect(x, y, width, height, TFT_WHITE);
 }

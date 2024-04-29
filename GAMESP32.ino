@@ -11,7 +11,9 @@
 #include "src/game_engine/GameScene.h"
 
 #include "src/demo/BounceSphere.h"
-#include "src/demo/Paddle.h"
+#include "src/demo/PaddleLeft.h"
+#include "src/demo/PaddleRight.h"
+#include "src/demo/PongGameScene.h"
 
 Button buttonA = Button(BUTTON_A_PIN, "Button A");
 Button buttonB = Button(BUTTON_B_PIN, "Button B");
@@ -21,15 +23,15 @@ JoystickAxis yAxis = JoystickAxis(VRY, "Y axis");
 
 Display display = Display(SCREEN_WIDTH, SCREEN_HEIGHT);
 RenderEngine renderEngine = RenderEngine();
-GameScene gameScene = GameScene();
+PongGameScene gameScene = PongGameScene();
 GameEngine gameEngine = GameEngine();
 
 InputManager *inputManager = InputManager::getInstance();
 
 // BounceSphere
 int radius = 4;
-int speedX = 1;
-int speedY = 1;
+int speedX = 3;
+int speedY = 3;
 int initialX = SCREEN_WIDTH / 2;
 int initialY = SCREEN_HEIGHT / 2;
 BounceSphere bounceSphere = BounceSphere(radius, initialX, initialY, speedX, speedY);
@@ -40,7 +42,8 @@ int paddleY = 12;
 int paddleWidth = 4;
 int paddleHeight = 20;
 int paddleSpeed = 4;
-Paddle paddle = Paddle(paddleX, paddleY, paddleWidth, paddleHeight, paddleSpeed);
+PaddleLeft paddleLeft = PaddleLeft(paddleX, paddleY, paddleWidth, paddleHeight, paddleSpeed);
+PaddleRight paddleRight = PaddleRight(SCREEN_WIDTH - paddleX + paddleWidth, paddleY, paddleWidth, paddleHeight, paddleSpeed);
 
 void setup()
 {
@@ -49,7 +52,8 @@ void setup()
 
     display.begin();
     gameScene.addGameObject(&bounceSphere);
-    gameScene.addGameObject(&paddle);
+    gameScene.addGameObject(&paddleLeft);
+    gameScene.addGameObject(&paddleRight);
     bounceSphere.setParentScene(&gameScene);
     // paddle.setParentScene(&gameScene);
 

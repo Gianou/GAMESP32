@@ -1,26 +1,26 @@
-#ifndef Game_Scene_H
-#define Game_Scene_H
+#ifndef Pong_Game_Scene_H
+#define Pong_Game_Scene_H
 
-#include "AbstractGameObject.h"
-#include "AbstractCompositGameObject.h"
-#include "CollisionDetector.h"
+#include "../game_engine/GameScene.h"
+#include "ScoreHandler.h"
 
-class GameScene : public AbstractGameObject,
-                  public AbstractCompositeGameObject
+class PongGameScene : public GameScene
 // HasCollisionDetector interface?
 {
 public:
-    GameScene();
+    PongGameScene();
     void update() override;
     void render(TFT_eSprite &sprite) override;
     void addGameObject(AbstractGameObject *gameObject) override;
     void removeGameObject(AbstractGameObject *gameObject) override;
     std::vector<AbstractGameObject *> getChildren() override;
-    CollisionDetector *getCollisionDetector();
+    CollisionDetector getCollisionDetector();
+    ScoreHandler getScoreHandler();
 
 private:
     std::vector<AbstractGameObject *> gameObjects;
     CollisionDetector collisionDetector;
+    ScoreHandler scoreHandler;
 };
 
 #endif

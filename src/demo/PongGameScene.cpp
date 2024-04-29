@@ -1,11 +1,12 @@
-#include "GameScene.h"
+#include "PongGameScene.h"
 
-GameScene::GameScene()
+PongGameScene::PongGameScene()
 {
     collisionDetector = CollisionDetector();
+    scoreHandler = ScoreHandler();
 }
 
-void GameScene::update() // Make an adapter pattern to have gameSceneAware objects only?
+void PongGameScene::update() // Make an adapter pattern to have gameSceneAware objects only?
 {
     for (AbstractGameObject *gameObject : gameObjects)
     {
@@ -13,7 +14,7 @@ void GameScene::update() // Make an adapter pattern to have gameSceneAware objec
     }
 }
 
-void GameScene::render(TFT_eSprite &sprite)
+void PongGameScene::render(TFT_eSprite &sprite)
 {
     for (AbstractGameObject *gameObject : gameObjects)
     {
@@ -21,12 +22,12 @@ void GameScene::render(TFT_eSprite &sprite)
     }
 }
 
-void GameScene::addGameObject(AbstractGameObject *gameObject)
+void PongGameScene::addGameObject(AbstractGameObject *gameObject)
 {
     gameObjects.push_back(gameObject);
 }
 
-void GameScene::removeGameObject(AbstractGameObject *gameObject)
+void PongGameScene::removeGameObject(AbstractGameObject *gameObject)
 {
     // Find the game object in the vector
     std::vector<AbstractGameObject *>::iterator it = std::find(gameObjects.begin(), gameObjects.end(), gameObject);
@@ -42,12 +43,12 @@ void GameScene::removeGameObject(AbstractGameObject *gameObject)
     }
 }
 
-std::vector<AbstractGameObject *> GameScene::getChildren()
+std::vector<AbstractGameObject *> PongGameScene::getChildren()
 {
     return gameObjects;
 }
 
-CollisionDetector *GameScene::getCollisionDetector()
+CollisionDetector PongGameScene::getCollisionDetector()
 {
-    return &collisionDetector;
+    return collisionDetector;
 }
