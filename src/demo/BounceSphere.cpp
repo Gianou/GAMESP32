@@ -21,9 +21,19 @@ void BounceSphere::update()
     rigidBody->setY(newRigidBodyY);
 
     // Check bounds and bounce if necessary
-    if (x - radius < 0 || x + radius > SCREEN_WIDTH)
+    if (x + radius > SCREEN_WIDTH)
     {
-        speedX = -speedX;
+        // left player scores
+        ScoreHandler *scoreHandler = getParentScene()->getScoreHandler();
+        int currentScore = scoreHandler->getLeftPlayerScore();
+        scoreHandler->setLeftPlayerScore(currentScore + 1);
+    }
+    if (x - radius < 0)
+    {
+        // right player scores
+        ScoreHandler *scoreHandler = getParentScene()->getScoreHandler();
+        int currentScore = scoreHandler->getRightPlayerScore();
+        scoreHandler->setRightPlayerScore(currentScore + 1);
     }
     if (y - radius < 0 || y + radius > SCREEN_HEIGHT)
     {
@@ -42,6 +52,15 @@ void BounceSphere::update()
             speedY = -speedY;
         }
     }
+
+    // reset ball if way out
+    if (x < -60 || x > 60 + SCREEN_WIDTH)
+    {
+        x = SCREEN_WIDTH / 2;
+        y = SCREEN_HEIGHT / 2;
+        rigidBody->setX(x);
+        rigidBody->setY(y);
+    }
 }
 
 void BounceSphere::render(TFT_eSprite &sprite)
@@ -51,12 +70,12 @@ void BounceSphere::render(TFT_eSprite &sprite)
     sprite.fillCircle(x, y, radius, TFT_WHITE);
 }
 
-void BounceSphere::setParentScene(GameScene *parent)
+void BounceSphere::setParentScene(PongGameScene *parent)
 {
     this->parent = parent;
 }
 
-GameScene *BounceSphere::getParentScene()
+PongGameScene *BounceSphere::getParentScene()
 {
     return parent;
 }

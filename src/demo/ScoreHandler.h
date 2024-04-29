@@ -4,12 +4,12 @@
 class ScoreHandler
 {
 public:
-    int leftPlayerScore;
-    int rightPlayerScore;
+    int leftPlayerScore = 0;
+    int rightPlayerScore = 0;
     void setLeftPlayerScore(int newScore);
     void setRightPlayerScore(int newScore);
     int getLeftPlayerScore();
-    int setLeftPlayerScore();
+    int getRightPlayerScore();
 
 private:
 };

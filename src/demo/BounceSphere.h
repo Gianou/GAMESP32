@@ -2,21 +2,22 @@
 #define Bounce_Sphere_H
 
 #include "../game_engine/AbstractGameObject.h"
-#include "../game_engine/GameScene.h"
+#include "PongGameScene.h"
 #include "../game_engine/CollisionDetector.h"
 #include "../game_engine/AbstractGameSceneAware.h"
 #include "../../config/Constants.h"
 
-class BounceSphere : public AbstractGameObject,
-                     public AbstractGameSceneAware
+class BounceSphere : public AbstractGameObject
+//,
+// public AbstractGameSceneAware
 {
 public:
     BounceSphere(int radius, int initialX, int initialY, int speedX, int speedY);
     void update() override;
     void render(TFT_eSprite &sprite) override;
 
-    void setParentScene(GameScene *parent);
-    GameScene *getParentScene();
+    void setParentScene(PongGameScene *parent);
+    PongGameScene *getParentScene();
 
     RigidBody *getRigidBody() override { return rigidBody; };
 
@@ -27,7 +28,7 @@ private:
     int speedX;
     int speedY;
 
-    GameScene *parent;
+    PongGameScene *parent;
     RigidBody *rigidBody;
 };
 

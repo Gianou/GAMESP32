@@ -15,8 +15,8 @@ public:
     void render(TFT_eSprite &sprite) override;
     void addGameObject(AbstractGameObject *gameObject) override;
     void removeGameObject(AbstractGameObject *gameObject) override;
-    std::vector<AbstractGameObject *> getChildren() override;
-    CollisionDetector *getCollisionDetector();
+    virtual std::vector<AbstractGameObject *> getChildren() override;
+    virtual CollisionDetector *getCollisionDetector();
 
 private:
     std::vector<AbstractGameObject *> gameObjects;

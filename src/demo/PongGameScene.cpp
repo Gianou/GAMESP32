@@ -2,8 +2,10 @@
 
 PongGameScene::PongGameScene()
 {
-    collisionDetector = CollisionDetector();
-    scoreHandler = ScoreHandler();
+    collisionDetector = new CollisionDetector();
+    scoreHandler = new ScoreHandler();
+    scoreUI = new ScoreUI(scoreHandler);
+    addGameObject(scoreUI);
 }
 
 void PongGameScene::update() // Make an adapter pattern to have gameSceneAware objects only?
@@ -48,7 +50,12 @@ std::vector<AbstractGameObject *> PongGameScene::getChildren()
     return gameObjects;
 }
 
-CollisionDetector PongGameScene::getCollisionDetector()
+CollisionDetector *PongGameScene::getCollisionDetector()
 {
     return collisionDetector;
+}
+
+ScoreHandler *PongGameScene::getScoreHandler()
+{
+    return scoreHandler;
 }
