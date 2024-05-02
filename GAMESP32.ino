@@ -53,10 +53,6 @@ void setup()
     Serial.begin(115200);
     inputManager->addInputs({&buttonA, &buttonB, &buttonSW, &xAxis, &yAxis});
 
-    display.begin();
-    display.display();
-    display.clearDisplay();
-
     gameScene.addGameObject(&bounceSphere);
     gameScene.addGameObject(&paddleLeft);
     gameScene.addGameObject(&paddleRight);
@@ -64,17 +60,17 @@ void setup()
     // paddle.setParentScene(&gameScene);
 
     gameEngine.addGameObject(&gameScene);
-    // gameEngine.addGameObject(&renderEngine);
+    gameEngine.addGameObject(&renderEngine);
 }
 
 void loop()
 {
     unsigned long startTime = millis();
 
-    display.clearDisplay();
     gameEngine.update();
     gameEngine.render(display);
-    display.display();
+    // display.display();
+    // display.clearDisplay();
 
     unsigned long endTime = millis();
     unsigned long duration = endTime - startTime;
