@@ -1,10 +1,13 @@
 #include <SPI.h>
 
+#include <Adafruit_SSD1325.h>
+#include <Adafruit_GFX.h>
+
 #include "config/Constants.h"
 
 #include "src/components/Button.h"
 #include "src/components/JoystickAxis.h"
-#include "src/components/Display.h"
+// #include "src/components/DisplayOLED.h"
 #include "src/managers/InputManager.h"
 #include "src/game_engine/RenderEngine.h"
 #include "src/game_engine/GameEngine.h"
@@ -21,7 +24,7 @@ Button buttonSW = Button(SW, "Button SW");
 JoystickAxis xAxis = JoystickAxis(VRX, "X axis");
 JoystickAxis yAxis = JoystickAxis(VRY, "Y axis");
 
-Display display = Display(SCREEN_WIDTH, SCREEN_HEIGHT);
+Adafruit_SSD1325 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 RenderEngine renderEngine = RenderEngine();
 PongGameScene gameScene = PongGameScene();
 GameEngine gameEngine = GameEngine();
@@ -45,12 +48,18 @@ int paddleSpeed = 4;
 PaddleLeft paddleLeft = PaddleLeft(paddleX, paddleY, paddleWidth, paddleHeight, paddleSpeed);
 PaddleRight paddleRight = PaddleRight(SCREEN_WIDTH - paddleX + paddleWidth, paddleY, paddleWidth, paddleHeight, paddleSpeed);
 
+int x = 0;
+int y = 0;
+
 void setup()
 {
     Serial.begin(115200);
     inputManager->addInputs({&buttonA, &buttonB, &buttonSW, &xAxis, &yAxis});
 
     display.begin();
+    display.display();
+    display.clearDisplay();
+
     gameScene.addGameObject(&bounceSphere);
     gameScene.addGameObject(&paddleLeft);
     gameScene.addGameObject(&paddleRight);
@@ -58,15 +67,21 @@ void setup()
     // paddle.setParentScene(&gameScene);
 
     gameEngine.addGameObject(&gameScene);
-    gameEngine.addGameObject(&renderEngine);
+    // gameEngine.addGameObject(&renderEngine);
 }
 
 void loop()
 {
     unsigned long startTime = millis();
 
-    gameEngine.update();
-    gameEngine.render(display.getSprite());
+    x++;
+    y++;
+
+    display.clearDisplay();
+    // gameEngine.update();
+    // gameEngine.render(display);
+    display.fillRect(x, y, 20, 20, WHITE);
+    display.display();
 
     unsigned long endTime = millis();
     unsigned long duration = endTime - startTime;
