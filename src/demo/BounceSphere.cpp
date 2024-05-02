@@ -63,11 +63,11 @@ void BounceSphere::update()
     }
 }
 
-void BounceSphere::render(TFT_eSprite &sprite)
+void BounceSphere::render(Adafruit_SSD1325 &display)
 {
     // Draw the sphere with 1 sprite per
-    sprite.fillRect(rigidBody->getX(), rigidBody->getY(), rigidBody->getWidth(), rigidBody->getHeight(), TFT_BLUE);
-    sprite.fillCircle(x, y, radius, TFT_WHITE);
+    display.fillRect(rigidBody->getX(), rigidBody->getY(), rigidBody->getWidth(), rigidBody->getHeight(), WHITE);
+    display.fillCircle(x, y, radius, WHITE);
 }
 
 void BounceSphere::setParentScene(PongGameScene *parent)

@@ -12,7 +12,7 @@ boolean CollisionDetector::checkCollision(AbstractGameObject *callerGameObject, 
     // return false;
     if (!callerGameObject->getRigidBody() || !gameObject->getRigidBody())
     {
-        Serial.println("Test 1");
+        // Serial.println("Test 1");
         return false;
     }
 
@@ -20,7 +20,7 @@ boolean CollisionDetector::checkCollision(AbstractGameObject *callerGameObject, 
     if (callerGameObject == gameObject)
     {
         // They are the same object, so no collision
-        Serial.println("Test 2");
+        // Serial.println("Test 2");
 
         return false;
     }
@@ -39,12 +39,12 @@ boolean CollisionDetector::checkCollision(AbstractGameObject *callerGameObject, 
     // Check for collision using Axis-Aligned Bounding Box (AABB) method
     if (callerRight >= objectLeft && callerLeft <= objectRight && callerBottom >= objectTop && callerTop <= objectBottom)
     {
-        Serial.println("Collision detected");
+        // Serial.println("Collision detected");
 
         // Collision detected
         return true;
     }
-    Serial.println("End of function, returns false");
+    // Serial.println("End of function, returns false");
 
     return false;
 }

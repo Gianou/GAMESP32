@@ -9,7 +9,7 @@ class ScoreUI : public AbstractGameObject
 public:
     ScoreUI(ScoreHandler *scoreHandler);
     void update() override;
-    void render(TFT_eSprite &sprite) override;
+    void render(Adafruit_SSD1325 &display) override;
 
     RigidBody *getRigidBody() { return nullptr; };
 

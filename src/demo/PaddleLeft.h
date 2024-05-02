@@ -10,7 +10,7 @@ class PaddleLeft : public AbstractGameObject
 public:
     PaddleLeft(int x, int y, int width, int height, int speed);
     void update() override;
-    void render(TFT_eSprite &sprite) override;
+    void render(Adafruit_SSD1325 &display) override;
 
     RigidBody *getRigidBody() override { return rigidBody; };
 

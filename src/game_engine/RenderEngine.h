@@ -12,7 +12,7 @@ class RenderEngine : public AbstractGameObject
 public:
     RenderEngine();
     void update() override;
-    void render(TFT_eSprite &sprite) override;
+    void render(Adafruit_SSD1325 &display) override;
 
 private:
 };

@@ -8,11 +8,11 @@ void GameEngine::update()
     }
 }
 
-void GameEngine::render(TFT_eSprite &sprite)
+void GameEngine::render(Adafruit_SSD1325 &display)
 {
     for (AbstractGameObject *gameObject : gameObjects)
     {
-        gameObject->render(sprite);
+        gameObject->render(display);
     }
 }
 

@@ -16,11 +16,11 @@ void PongGameScene::update() // Make an adapter pattern to have gameSceneAware o
     }
 }
 
-void PongGameScene::render(TFT_eSprite &sprite)
+void PongGameScene::render(Adafruit_SSD1325 &display)
 {
     for (AbstractGameObject *gameObject : gameObjects)
     {
-        gameObject->render(sprite);
+        gameObject->render(display);
     }
 }
 

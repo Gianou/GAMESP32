@@ -11,7 +11,7 @@ class PongGameScene : public GameScene
 public:
     PongGameScene();
     void update() override;
-    void render(TFT_eSprite &sprite) override;
+    void render(Adafruit_SSD1325 &display) override;
     void addGameObject(AbstractGameObject *gameObject) override;
     void removeGameObject(AbstractGameObject *gameObject) override;
     std::vector<AbstractGameObject *> getChildren() override;

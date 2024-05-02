@@ -14,7 +14,7 @@ class BounceSphere : public AbstractGameObject
 public:
     BounceSphere(int radius, int initialX, int initialY, int speedX, int speedY);
     void update() override;
-    void render(TFT_eSprite &sprite) override;
+    void render(Adafruit_SSD1325 &display) override;
 
     void setParentScene(PongGameScene *parent);
     PongGameScene *getParentScene();

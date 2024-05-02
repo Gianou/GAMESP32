@@ -13,11 +13,11 @@ void GameScene::update() // Make an adapter pattern to have gameSceneAware objec
     }
 }
 
-void GameScene::render(TFT_eSprite &sprite)
+void GameScene::render(Adafruit_SSD1325 &display)
 {
     for (AbstractGameObject *gameObject : gameObjects)
     {
-        gameObject->render(sprite);
+        gameObject->render(display);
     }
 }
 

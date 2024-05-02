@@ -48,9 +48,6 @@ int paddleSpeed = 4;
 PaddleLeft paddleLeft = PaddleLeft(paddleX, paddleY, paddleWidth, paddleHeight, paddleSpeed);
 PaddleRight paddleRight = PaddleRight(SCREEN_WIDTH - paddleX + paddleWidth, paddleY, paddleWidth, paddleHeight, paddleSpeed);
 
-int x = 0;
-int y = 0;
-
 void setup()
 {
     Serial.begin(115200);
@@ -74,13 +71,9 @@ void loop()
 {
     unsigned long startTime = millis();
 
-    x++;
-    y++;
-
     display.clearDisplay();
-    // gameEngine.update();
-    // gameEngine.render(display);
-    display.fillRect(x, y, 20, 20, WHITE);
+    gameEngine.update();
+    gameEngine.render(display);
     display.display();
 
     unsigned long endTime = millis();

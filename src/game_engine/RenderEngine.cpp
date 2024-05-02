@@ -8,8 +8,8 @@ void RenderEngine::update()
 {
 }
 
-void RenderEngine::render(TFT_eSprite &sprite)
+void RenderEngine::render(Adafruit_SSD1325 &display)
 {
-    sprite.pushSprite(0, 0);
-    sprite.fillSprite(TFT_BLACK);
+    // display.pushSprite(0, 0);
+    // display.fillSprite(TFT_BLACK);
 }

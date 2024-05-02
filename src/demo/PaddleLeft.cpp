@@ -32,7 +32,7 @@ void PaddleLeft::update()
     rigidBody->setY(y);
 }
 
-void PaddleLeft::render(TFT_eSprite &sprite)
+void PaddleLeft::render(Adafruit_SSD1325 &display)
 {
-    sprite.fillRect(x, y, width, height, TFT_WHITE);
+    display.fillRect(x, y, width, height, WHITE);
 }
