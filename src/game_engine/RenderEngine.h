@@ -8,7 +8,6 @@
 #include <Adafruit_GFX.h>
 
 #include "AbstractGameObject.h"
-#include "../components/Display.h"
 #include "../../config/Constants.h"
 
 class RenderEngine : public AbstractGameObject

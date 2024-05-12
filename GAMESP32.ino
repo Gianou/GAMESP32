@@ -7,7 +7,6 @@
 
 #include "src/components/Button.h"
 #include "src/components/JoystickAxis.h"
-// #include "src/components/DisplayOLED.h"
 #include "src/managers/InputManager.h"
 #include "src/game_engine/RenderEngine.h"
 #include "src/game_engine/GameEngine.h"
@@ -32,7 +31,7 @@ GameEngine gameEngine = GameEngine();
 InputManager *inputManager = InputManager::getInstance();
 
 // BounceSphere
-int radius = 4;
+int radius = 3;
 int speedX = 3;
 int speedY = 3;
 int initialX = SCREEN_WIDTH / 2;
@@ -43,7 +42,7 @@ BounceSphere bounceSphere = BounceSphere(radius, initialX, initialY, speedX, spe
 int paddleX = 12;
 int paddleY = 12;
 int paddleWidth = 4;
-int paddleHeight = 20;
+int paddleHeight = 12;
 int paddleSpeed = 4;
 PaddleLeft paddleLeft = PaddleLeft(paddleX, paddleY, paddleWidth, paddleHeight, paddleSpeed);
 PaddleRight paddleRight = PaddleRight(SCREEN_WIDTH - paddleX + paddleWidth, paddleY, paddleWidth, paddleHeight, paddleSpeed);
@@ -74,7 +73,15 @@ void loop()
 
     unsigned long endTime = millis();
     unsigned long duration = endTime - startTime;
-    Serial.println("Loop iteration duration: " + String(duration) + "ms");
+    // Serial.println("Loop iteration duration: " + String(duration) + "ms");
+
+    Serial.print("X");
+    Serial.println(inputManager->getInputValue("X axis"));
+    Serial.print("Y");
+    Serial.println(inputManager->getInputValue("Y axis"));
+    Serial.print("SW");
+
+    Serial.println(inputManager->getInputValue("Button SW"));
 }
 
 void waitUntilEndOfFrame()

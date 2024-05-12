@@ -1,12 +1,12 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-const int BUTTON_A_PIN = 37;
-const int BUTTON_B_PIN = 21;
+const int BUTTON_A_PIN = 5;
+const int BUTTON_B_PIN = 6;
 
-const int VRX = 7;
-const int VRY = 3;
-const int SW = 46;
+const int VRX = 2;
+const int VRY = 1;
+const int SW = 39;
 
 const int FRAME_DURATION_MS = 33;
 const int SCREEN_WIDTH = 128;
