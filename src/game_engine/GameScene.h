@@ -7,7 +7,6 @@
 
 class GameScene : public AbstractGameObject,
                   public AbstractCompositeGameObject
-// HasCollisionDetector interface?
 {
 public:
     GameScene();

@@ -56,7 +56,6 @@ void setup()
     gameScene.addGameObject(&paddleLeft);
     gameScene.addGameObject(&paddleRight);
     bounceSphere.setParentScene(&gameScene);
-    // paddle.setParentScene(&gameScene);
 
     gameEngine.addGameObject(&gameScene);
     gameEngine.addGameObject(&renderEngine);
@@ -64,24 +63,9 @@ void setup()
 
 void loop()
 {
-    unsigned long startTime = millis();
-
     gameEngine.update();
     gameEngine.render(display);
-    // display.display();
-    // display.clearDisplay();
-
-    unsigned long endTime = millis();
-    unsigned long duration = endTime - startTime;
-    // Serial.println("Loop iteration duration: " + String(duration) + "ms");
-
-    Serial.print("X");
-    Serial.println(inputManager->getInputValue("X axis"));
-    Serial.print("Y");
-    Serial.println(inputManager->getInputValue("Y axis"));
-    Serial.print("SW");
-
-    Serial.println(inputManager->getInputValue("Button SW"));
+    waitUntilEndOfFrame();
 }
 
 void waitUntilEndOfFrame()
