@@ -27,9 +27,14 @@ private:
     int y;
     int speedX;
     int speedY;
+    boolean isGameGoing = true;
 
     PongGameScene *parent;
     RigidBody *rigidBody;
+    void moveSphere();
+    void checkForScoring();
+    void checkForBounce();
+    void resetAfterScoring();
 };
 
 #endif
