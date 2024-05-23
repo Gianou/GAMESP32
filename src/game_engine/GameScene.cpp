@@ -1,6 +1,10 @@
-#include "GameEngine.h"
+#include "GameScene.h"
 
-void GameEngine::update()
+GameScene::GameScene()
+{
+}
+
+void GameScene::update()
 {
     for (AbstractGameObject *gameObject : gameObjects)
     {
@@ -8,7 +12,7 @@ void GameEngine::update()
     }
 }
 
-void GameEngine::render(Adafruit_SSD1325 &display)
+void GameScene::render(Adafruit_SSD1325 &display)
 {
     for (AbstractGameObject *gameObject : gameObjects)
     {
@@ -16,12 +20,12 @@ void GameEngine::render(Adafruit_SSD1325 &display)
     }
 }
 
-void GameEngine::addGameObject(AbstractGameObject *gameObject)
+void GameScene::addGameObject(AbstractGameObject *gameObject)
 {
     gameObjects.push_back(gameObject);
 }
 
-void GameEngine::removeGameObject(AbstractGameObject *gameObject)
+void GameScene::removeGameObject(AbstractGameObject *gameObject)
 {
     // Find the game object in the vector
     std::vector<AbstractGameObject *>::iterator it = std::find(gameObjects.begin(), gameObjects.end(), gameObject);
@@ -37,7 +41,7 @@ void GameEngine::removeGameObject(AbstractGameObject *gameObject)
     }
 }
 
-std::vector<AbstractGameObject *> GameEngine::getChildren()
+std::vector<AbstractGameObject *> GameScene::getChildren()
 {
     return gameObjects;
 }

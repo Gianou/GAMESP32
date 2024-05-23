@@ -40,7 +40,7 @@ int InputManager::getInputValue(const String &name)
     auto it = inputMap_.find(name);
     if (it != inputMap_.end())
     {
-        return it->second->getValue(); // Assuming AbstractInput::getValue() returns an int
+        return it->second->getValue();
     }
-    return 0; // Or any default value indicating input not found
+    return 0;
 }

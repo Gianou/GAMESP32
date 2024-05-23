@@ -1,23 +1,21 @@
-#define BUTTON_A_PIN 37
-#define BUTTON_B_PIN 21
-
-#define VRX 8
-#define VRY 3
-#define SW 46
-
-#define FRAME_DURATION_MS 33
-#define SCREEN_WIDTH 128
-#define SCREEN_HEIGHT 64
-
 #include <SPI.h>
+
+#include <Adafruit_SSD1325.h>
+#include <Adafruit_GFX.h>
+
+#include "config/Constants.h"
 
 #include "src/components/Button.h"
 #include "src/components/JoystickAxis.h"
-#include "src/components/Display.h"
 #include "src/managers/InputManager.h"
 #include "src/game_engine/RenderEngine.h"
 #include "src/game_engine/GameEngine.h"
-#include "src/demo/DemoBounceSphere.h"
+#include "src/game_engine/GameScene.h"
+
+#include "src/demo/BounceSphere.h"
+#include "src/demo/PaddleLeft.h"
+#include "src/demo/PaddleRight.h"
+#include "src/demo/PongGameScene.h"
 
 Button buttonA = Button(BUTTON_A_PIN, "Button A");
 Button buttonB = Button(BUTTON_B_PIN, "Button B");
@@ -25,43 +23,49 @@ Button buttonSW = Button(SW, "Button SW");
 JoystickAxis xAxis = JoystickAxis(VRX, "X axis");
 JoystickAxis yAxis = JoystickAxis(VRY, "Y axis");
 
-Display display = Display(SCREEN_WIDTH, SCREEN_HEIGHT);
+Adafruit_SSD1325 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 RenderEngine renderEngine = RenderEngine();
+PongGameScene gameScene = PongGameScene();
 GameEngine gameEngine = GameEngine();
 
 InputManager *inputManager = InputManager::getInstance();
 
-int radius = 8;
-int speedX = 1;
-int speedY = 1;
-int screenWidth = SCREEN_WIDTH;
-int screenHeight = SCREEN_HEIGHT;
-int initialX = screenWidth / 2;
-int initialY = screenHeight / 2;
+// BounceSphere
+int radius = 3;
+int speedX = 3;
+int speedY = 3;
+int initialX = SCREEN_WIDTH / 2;
+int initialY = SCREEN_HEIGHT / 2;
+BounceSphere bounceSphere = BounceSphere(radius, initialX, initialY, speedX, speedY);
 
-DemoBounceSphere bounceSphere = DemoBounceSphere(radius, initialX, initialY, speedX, speedY, screenWidth, screenHeight);
-int counter = 0;
+// Paddle
+int paddleX = 12;
+int paddleY = 12;
+int paddleWidth = 4;
+int paddleHeight = 12;
+int paddleSpeed = 4;
+PaddleLeft paddleLeft = PaddleLeft(paddleX, paddleY, paddleWidth, paddleHeight, paddleSpeed);
+PaddleRight paddleRight = PaddleRight(SCREEN_WIDTH - paddleX + paddleWidth, paddleY, paddleWidth, paddleHeight, paddleSpeed);
 
 void setup()
 {
     Serial.begin(115200);
     inputManager->addInputs({&buttonA, &buttonB, &buttonSW, &xAxis, &yAxis});
 
-    display.begin();
-    gameEngine.addGameObject(&bounceSphere);
+    gameScene.addGameObject(&bounceSphere);
+    gameScene.addGameObject(&paddleLeft);
+    gameScene.addGameObject(&paddleRight);
+    bounceSphere.setParentScene(&gameScene);
+
+    gameEngine.addGameObject(&gameScene);
     gameEngine.addGameObject(&renderEngine);
 }
 
 void loop()
 {
-    unsigned long startTime = millis();
-
     gameEngine.update();
-    gameEngine.render(display.getSprite());
-
-    unsigned long endTime = millis();
-    unsigned long duration = endTime - startTime;
-    Serial.println("Loop iteration duration: " + String(duration) + "ms");
+    gameEngine.render(display);
+    waitUntilEndOfFrame();
 }
 
 void waitUntilEndOfFrame()
