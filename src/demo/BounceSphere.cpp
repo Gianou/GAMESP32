@@ -3,7 +3,7 @@
 BounceSphere::BounceSphere(int radius, int initialX, int initialY, int speedX, int speedY)
     : radius(radius), x(initialX), y(initialY), speedX(speedX), speedY(speedY)
 {
-    rigidBody = new RigidBody(x - radius, y - radius, radius * 2, radius * 2);
+    hitBox = new HitBox(x - radius, y - radius, radius * 2, radius * 2);
 }
 
 void BounceSphere::update()
@@ -16,7 +16,7 @@ void BounceSphere::update()
 
 void BounceSphere::render(Adafruit_SSD1325 &display)
 {
-    // display.fillRect(rigidBody->getX(), rigidBody->getY(), rigidBody->getWidth(), rigidBody->getHeight(), WHITE);
+    // display.fillRect(hitBox->getX(), hitBox->getY(), hitBox->getWidth(), hitBox->getHeight(), WHITE);
     display.fillCircle(x, y, radius, WHITE);
 }
 
@@ -35,14 +35,14 @@ void BounceSphere::moveSphere()
     // Update position based on speed
     x += speedX;
     y += speedY;
-    // Same for rigidBody
-    int newRigidBodyX = rigidBody->getX();
-    newRigidBodyX += speedX;
-    rigidBody->setX(newRigidBodyX);
+    // Same for hitBox
+    int newHitBoxX = hitBox->getX();
+    newHitBoxX += speedX;
+    hitBox->setX(newHitBoxX);
 
-    int newRigidBodyY = rigidBody->getY();
-    newRigidBodyY += speedY;
-    rigidBody->setY(newRigidBodyY);
+    int newHitBoxY = hitBox->getY();
+    newHitBoxY += speedY;
+    hitBox->setY(newHitBoxY);
 }
 
 void BounceSphere::checkForScoring()
@@ -92,8 +92,8 @@ void BounceSphere::resetAfterScoring()
     {
         x = SCREEN_WIDTH / 2;
         y = SCREEN_HEIGHT / 2;
-        rigidBody->setX(x - radius);
-        rigidBody->setY(y - radius);
+        hitBox->setX(x - radius);
+        hitBox->setY(y - radius);
         speedY = -speedY;
         speedX = -speedX;
         isGameGoing = true;

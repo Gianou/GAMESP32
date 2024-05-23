@@ -1,10 +1,10 @@
-#ifndef Rigid_Body
-#define Rigid_Body
+#ifndef Hit_Box
+#define Hit_Box
 
-class RigidBody
+class HitBox
 {
 public:
-    RigidBody(int x, int y, int width, int height);
+    HitBox(int x, int y, int width, int height);
     int getX() { return x; };
     int getY() { return y; };
     int getWidth() { return width; };

@@ -11,7 +11,7 @@ public:
     void update() override;
     void render(Adafruit_SSD1325 &display) override;
 
-    RigidBody *getRigidBody() { return nullptr; };
+    HitBox *getHitBox() { return nullptr; };
 
 private:
     ScoreHandler *scoreHandler;

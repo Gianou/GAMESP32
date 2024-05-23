@@ -3,7 +3,7 @@
 PaddleRight::PaddleRight(int x, int y, int width, int height, int speed)
     : x(x), y(y), width(width), height(height), speed(speed)
 {
-    rigidBody = new RigidBody(x, y, width, height);
+    hitBox = new HitBox(x, y, width, height);
 }
 
 void PaddleRight::update()
@@ -28,8 +28,8 @@ void PaddleRight::update()
     }
 
     // Update rigidBody place
-    rigidBody->setX(x);
-    rigidBody->setY(y);
+    hitBox->setX(x);
+    hitBox->setY(y);
 }
 
 void PaddleRight::render(Adafruit_SSD1325 &display)

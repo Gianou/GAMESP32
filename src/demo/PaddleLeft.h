@@ -12,7 +12,7 @@ public:
     void update() override;
     void render(Adafruit_SSD1325 &display) override;
 
-    RigidBody *getRigidBody() override { return rigidBody; };
+    HitBox *getHitBox() override { return hitBox; };
 
 private:
     int x;
@@ -21,6 +21,6 @@ private:
     int height;
     int speed;
 
-    RigidBody *rigidBody;
+    HitBox *hitBox;
 };
 #endif

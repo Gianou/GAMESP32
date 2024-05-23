@@ -4,12 +4,9 @@
 #include "../game_engine/AbstractGameObject.h"
 #include "PongGameScene.h"
 #include "../game_engine/CollisionDetector.h"
-#include "../game_engine/AbstractGameSceneAware.h"
 #include "../../config/Constants.h"
 
 class BounceSphere : public AbstractGameObject
-//,
-// public AbstractGameSceneAware
 {
 public:
     BounceSphere(int radius, int initialX, int initialY, int speedX, int speedY);
@@ -19,7 +16,7 @@ public:
     void setParentScene(PongGameScene *parent);
     PongGameScene *getParentScene();
 
-    RigidBody *getRigidBody() override { return rigidBody; };
+    HitBox *getHitBox() override { return hitBox; };
 
 private:
     int radius;
@@ -30,7 +27,7 @@ private:
     boolean isGameGoing = true;
 
     PongGameScene *parent;
-    RigidBody *rigidBody;
+    HitBox *hitBox;
     void moveSphere();
     void checkForScoring();
     void checkForBounce();

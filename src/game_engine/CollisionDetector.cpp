@@ -2,15 +2,10 @@
 
 CollisionDetector::CollisionDetector() {}
 
-boolean CollisionDetector::detectCollisions(AbstractGameObject gameObject)
-{
-    return false;
-}
-
 boolean CollisionDetector::checkCollision(AbstractGameObject *callerGameObject, AbstractGameObject *gameObject)
 {
 
-    if (!callerGameObject->getRigidBody() || !gameObject->getRigidBody())
+    if (!callerGameObject->getHitBox() || !gameObject->getHitBox())
     {
         return false;
     }
@@ -22,15 +17,15 @@ boolean CollisionDetector::checkCollision(AbstractGameObject *callerGameObject, 
     }
 
     // Calculate the bounding boxes for both objects
-    int callerLeft = callerGameObject->getRigidBody()->getX();
-    int callerRight = callerGameObject->getRigidBody()->getX() + callerGameObject->getRigidBody()->getWidth();
-    int callerTop = callerGameObject->getRigidBody()->getY();
-    int callerBottom = callerGameObject->getRigidBody()->getY() + callerGameObject->getRigidBody()->getHeight();
+    int callerLeft = callerGameObject->getHitBox()->getX();
+    int callerRight = callerGameObject->getHitBox()->getX() + callerGameObject->getHitBox()->getWidth();
+    int callerTop = callerGameObject->getHitBox()->getY();
+    int callerBottom = callerGameObject->getHitBox()->getY() + callerGameObject->getHitBox()->getHeight();
 
-    int objectLeft = gameObject->getRigidBody()->getX();
-    int objectRight = gameObject->getRigidBody()->getX() + gameObject->getRigidBody()->getWidth();
-    int objectTop = gameObject->getRigidBody()->getY();
-    int objectBottom = gameObject->getRigidBody()->getY() + gameObject->getRigidBody()->getHeight();
+    int objectLeft = gameObject->getHitBox()->getX();
+    int objectRight = gameObject->getHitBox()->getX() + gameObject->getHitBox()->getWidth();
+    int objectTop = gameObject->getHitBox()->getY();
+    int objectBottom = gameObject->getHitBox()->getY() + gameObject->getHitBox()->getHeight();
 
     // Check for collision using Axis-Aligned Bounding Box (AABB) method
     if (callerRight >= objectLeft && callerLeft <= objectRight && callerBottom >= objectTop && callerTop <= objectBottom)
