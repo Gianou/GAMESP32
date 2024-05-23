@@ -3,7 +3,6 @@
 
 #include "AbstractGameObject.h"
 #include "AbstractCompositGameObject.h"
-#include "CollisionDetector.h"
 
 class GameScene : public AbstractGameObject,
                   public AbstractCompositeGameObject
@@ -15,11 +14,9 @@ public:
     void addGameObject(AbstractGameObject *gameObject) override;
     void removeGameObject(AbstractGameObject *gameObject) override;
     virtual std::vector<AbstractGameObject *> getChildren() override;
-    virtual CollisionDetector *getCollisionDetector();
 
 private:
     std::vector<AbstractGameObject *> gameObjects;
-    CollisionDetector collisionDetector;
 };
 
 #endif

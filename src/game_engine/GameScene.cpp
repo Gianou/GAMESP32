@@ -2,7 +2,6 @@
 
 GameScene::GameScene()
 {
-    collisionDetector = CollisionDetector();
 }
 
 void GameScene::update() // Make an adapter pattern to have gameSceneAware objects only?
@@ -45,9 +44,4 @@ void GameScene::removeGameObject(AbstractGameObject *gameObject)
 std::vector<AbstractGameObject *> GameScene::getChildren()
 {
     return gameObjects;
-}
-
-CollisionDetector *GameScene::getCollisionDetector()
-{
-    return &collisionDetector;
 }

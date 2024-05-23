@@ -4,9 +4,9 @@
 #include "../game_engine/GameScene.h"
 #include "ScoreHandler.h"
 #include "ScoreUI.h"
+#include "../game_engine/CollisionDetector.h"
 
 class PongGameScene : public GameScene
-// HasCollisionDetector interface?
 {
 public:
     PongGameScene();
@@ -15,7 +15,7 @@ public:
     void addGameObject(AbstractGameObject *gameObject) override;
     void removeGameObject(AbstractGameObject *gameObject) override;
     std::vector<AbstractGameObject *> getChildren() override;
-    CollisionDetector *getCollisionDetector() override;
+    CollisionDetector *getCollisionDetector();
     ScoreHandler *getScoreHandler();
 
 private:
