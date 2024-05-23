@@ -4,12 +4,10 @@ GameScene::GameScene()
 {
 }
 
-void GameScene::update() // Make an adapter pattern to have gameSceneAware objects only?
+void GameScene::update() for (AbstractGameObject *gameObject : gameObjects)
 {
-    for (AbstractGameObject *gameObject : gameObjects)
-    {
-        gameObject->update();
-    }
+    gameObject->update();
+}
 }
 
 void GameScene::render(Adafruit_SSD1325 &display)
