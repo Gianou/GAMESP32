@@ -4,10 +4,12 @@ GameScene::GameScene()
 {
 }
 
-void GameScene::update() for (AbstractGameObject *gameObject : gameObjects)
+void GameScene::update()
 {
-    gameObject->update();
-}
+    for (AbstractGameObject *gameObject : gameObjects)
+    {
+        gameObject->update();
+    }
 }
 
 void GameScene::render(Adafruit_SSD1325 &display)
