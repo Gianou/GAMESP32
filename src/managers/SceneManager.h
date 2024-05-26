@@ -18,6 +18,7 @@ public:
 
     void addGameScene(GameScene *gameScene);
     void setCurrentGameScene(GameScene *gameScene);
+    void setCurrentGameScene(String gameSceneName);
 
 private:
     SceneManager() {}

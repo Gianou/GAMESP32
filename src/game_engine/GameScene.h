@@ -16,6 +16,9 @@ public:
     void removeGameObject(AbstractGameObject *gameObject) override;
     virtual std::vector<AbstractGameObject *> getChildren() override;
 
+    virtual void onEnterScene();
+    virtual void onExitScene();
+
     String getName();
 
 private:

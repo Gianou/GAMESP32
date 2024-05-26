@@ -64,6 +64,7 @@ void setup()
     // gameEngine.addGameObject(&gameScene);
     gameEngine.addGameObject(sceneManager);
     gameEngine.addGameObject(&renderEngine);
+    sceneManager->setCurrentGameScene("Pong Game");
 }
 
 void loop()

@@ -1,3 +1,4 @@
+
 #include "GameScene.h"
 
 GameScene::GameScene(String name) : name(name)
@@ -50,3 +51,6 @@ String GameScene::getName()
 {
     return name;
 }
+
+void GameScene::onEnterScene() {}
+void GameScene::onExitScene() {}

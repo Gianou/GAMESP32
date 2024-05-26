@@ -15,6 +15,10 @@ public:
     void addGameObject(AbstractGameObject *gameObject) override;
     void removeGameObject(AbstractGameObject *gameObject) override;
     std::vector<AbstractGameObject *> getChildren() override;
+
+    void onEnterScene() override;
+    void onExitScene() override;
+
     CollisionDetector *getCollisionDetector();
     ScoreHandler *getScoreHandler();
 

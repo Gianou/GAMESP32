@@ -59,3 +59,9 @@ ScoreHandler *PongGameScene::getScoreHandler()
 {
     return scoreHandler;
 }
+
+void PongGameScene::onExitScene()
+{
+    Serial.println("Exiting " + getName());
+}
+void PongGameScene::onEnterScene() { Serial.println("Entering " + getName()); }
