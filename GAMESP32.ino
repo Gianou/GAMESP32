@@ -12,11 +12,14 @@
 #include "src/game_engine/RenderEngine.h"
 #include "src/game_engine/GameEngine.h"
 #include "src/game_engine/GameScene.h"
+#include "src/demo/StartMenuGameScene.h"
 
 #include "src/demo/BounceSphere.h"
 #include "src/demo/PaddleLeft.h"
 #include "src/demo/PaddleRight.h"
 #include "src/demo/PongGameScene.h"
+#include "src/demo/StartUI.h"
+// #include "src/demo/StartMenuGameScene.h"
 
 Button buttonA = Button(BUTTON_A_PIN, "Button A");
 Button buttonB = Button(BUTTON_B_PIN, "Button B");
@@ -26,7 +29,9 @@ JoystickAxis yAxis = JoystickAxis(VRY, "Y axis");
 
 Adafruit_SSD1325 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 RenderEngine renderEngine = RenderEngine();
-PongGameScene gameScene = PongGameScene("Pong Game");
+PongGameScene pongGameScene = PongGameScene("Pong Game");
+StartMenuGameScene startMenuGameScene = StartMenuGameScene("Start");
+StartUI startUI = StartUI();
 GameEngine gameEngine = GameEngine();
 
 InputManager *inputManager = InputManager::getInstance();
@@ -54,17 +59,20 @@ void setup()
     Serial.begin(115200);
     inputManager->addInputs({&buttonA, &buttonB, &buttonSW, &xAxis, &yAxis});
 
-    gameScene.addGameObject(&bounceSphere);
-    gameScene.addGameObject(&paddleLeft);
-    gameScene.addGameObject(&paddleRight);
-    bounceSphere.setParentScene(&gameScene);
+    pongGameScene.addGameObject(&bounceSphere);
+    pongGameScene.addGameObject(&paddleLeft);
+    pongGameScene.addGameObject(&paddleRight);
+    bounceSphere.setParentScene(&pongGameScene);
 
-    sceneManager->addGameScene(&gameScene);
+    startMenuGameScene.addGameObject(&startUI);
 
-    // gameEngine.addGameObject(&gameScene);
+    sceneManager->addGameScene(&pongGameScene);
+    sceneManager->addGameScene(&startMenuGameScene);
+
+    sceneManager->setCurrentGameScene("Start");
+
     gameEngine.addGameObject(sceneManager);
     gameEngine.addGameObject(&renderEngine);
-    sceneManager->setCurrentGameScene("Pong Game");
 }
 
 void loop()
