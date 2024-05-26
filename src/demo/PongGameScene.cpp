@@ -1,6 +1,6 @@
 #include "PongGameScene.h"
 
-PongGameScene::PongGameScene()
+PongGameScene::PongGameScene(String name) : GameScene(name)
 {
     collisionDetector = new CollisionDetector();
     scoreHandler = new ScoreHandler();

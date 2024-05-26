@@ -8,6 +8,7 @@
 #include "src/components/Button.h"
 #include "src/components/JoystickAxis.h"
 #include "src/managers/InputManager.h"
+#include "src/managers/SceneManager.h"
 #include "src/game_engine/RenderEngine.h"
 #include "src/game_engine/GameEngine.h"
 #include "src/game_engine/GameScene.h"
@@ -25,10 +26,11 @@ JoystickAxis yAxis = JoystickAxis(VRY, "Y axis");
 
 Adafruit_SSD1325 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 RenderEngine renderEngine = RenderEngine();
-PongGameScene gameScene = PongGameScene();
+PongGameScene gameScene = PongGameScene("Pong Game");
 GameEngine gameEngine = GameEngine();
 
 InputManager *inputManager = InputManager::getInstance();
+SceneManager *sceneManager = SceneManager::getInstance();
 
 // BounceSphere
 int radius = 3;
@@ -57,7 +59,10 @@ void setup()
     gameScene.addGameObject(&paddleRight);
     bounceSphere.setParentScene(&gameScene);
 
-    gameEngine.addGameObject(&gameScene);
+    sceneManager->addGameScene(&gameScene);
+
+    // gameEngine.addGameObject(&gameScene);
+    gameEngine.addGameObject(sceneManager);
     gameEngine.addGameObject(&renderEngine);
 }
 

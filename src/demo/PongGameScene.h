@@ -9,7 +9,7 @@
 class PongGameScene : public GameScene
 {
 public:
-    PongGameScene();
+    PongGameScene(String name);
     void update() override;
     void render(Adafruit_SSD1325 &display) override;
     void addGameObject(AbstractGameObject *gameObject) override;

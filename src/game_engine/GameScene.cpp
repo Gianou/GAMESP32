@@ -1,6 +1,6 @@
 #include "GameScene.h"
 
-GameScene::GameScene()
+GameScene::GameScene(String name) : name(name)
 {
 }
 
@@ -44,4 +44,9 @@ void GameScene::removeGameObject(AbstractGameObject *gameObject)
 std::vector<AbstractGameObject *> GameScene::getChildren()
 {
     return gameObjects;
+}
+
+String GameScene::getName()
+{
+    return name;
 }
