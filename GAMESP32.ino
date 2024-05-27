@@ -59,43 +59,31 @@ PaddleRight paddleRight = PaddleRight(SCREEN_WIDTH - paddleX + paddleWidth, padd
 void setup()
 {
     Serial.begin(115200);
+
+    // Add all the inputs to the InputManager
     inputManager->addInputs({&buttonA, &buttonB, &buttonSW, &xAxis, &yAxis});
 
+    // Add all the game objects to pongGameScene
     pongGameScene.addGameObject(&bounceSphere);
     pongGameScene.addGameObject(&paddleLeft);
     pongGameScene.addGameObject(&paddleRight);
     bounceSphere.setParentScene(&pongGameScene);
-    Serial.println("A");
 
+    // Add all the game objects to startMenuGameScene
     startMenuGameScene.addGameObject(&startUI);
-    Serial.println("B");
 
+    // Add all the game objects to endMenuGameScene
     endMenuGameScene.addGameObject(&endUI);
-    Serial.println("C");
 
+    // Add all the GameScenes to the sceneManager and set default one
     sceneManager->addGameScene(&pongGameScene);
-    Serial.println("D");
-
     sceneManager->addGameScene(&startMenuGameScene);
-    Serial.println("E");
-
     sceneManager->addGameScene(&endMenuGameScene);
-    Serial.println("F");
-
     sceneManager->setCurrentGameScene("Start");
-    Serial.println("G");
 
+    // Add sceneManager and renderEngine to the gameEngine
     gameEngine.addGameObject(sceneManager);
-    Serial.println("H");
-
-    // gameEngine.addGameObject(&pongGameScene); The pong scene does work
-
-    // startMenuGameScene.addGameObject(&startUI); startMenuGameScene with startUI works
-    // gameEngine.addGameObject(&startMenuGameScene);
-
-    // gameEngine.addGameObject(sceneManager); // looks like the issue came from calling a method on a null currentGameScene
     gameEngine.addGameObject(&renderEngine);
-    Serial.println("I");
 }
 
 void loop()

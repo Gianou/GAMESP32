@@ -22,7 +22,5 @@ void EndUI::render(Adafruit_SSD1325 &display)
     display.setTextSize(1);
 
     display.setCursor(12, 38);
-    display.println("Press B");
-    display.setCursor(12, 46);
-    display.println("to go back");
+    display.println("Press B to go back");
 }
