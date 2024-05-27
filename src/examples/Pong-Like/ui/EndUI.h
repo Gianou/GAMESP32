@@ -1,15 +1,16 @@
-#ifndef Start_UI_H
-#define Start_UI_H
+#ifndef End_UI_H
+#define End_UI_H
 
 #include "../../../game_engine/AbstractGameObject.h"
+#include "../../../game_engine/GameScene.h"
 
 #include "../../../managers/InputManager.h"
 #include "../../../managers/SceneManager.h"
 
-class StartUI : public AbstractGameObject
+class EndUI : public AbstractGameObject
 {
 public:
-    StartUI();
+    EndUI();
     void update() override;
     void render(Adafruit_SSD1325 &display) override;
 

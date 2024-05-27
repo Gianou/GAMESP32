@@ -1,10 +1,10 @@
 #ifndef Pong_Game_Scene_H
 #define Pong_Game_Scene_H
 
-#include "../../../game_engine/GameScene.h"
 #include "ScoreHandler.h"
 #include "ScoreUI.h"
 #include "../../../game_engine/CollisionDetector.h"
+#include "../../../game_engine/GameScene.h"
 
 class PongGameScene : public GameScene
 {

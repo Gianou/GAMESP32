@@ -5,6 +5,7 @@
 
 #include "../game_engine/AbstractGameObject.h"
 #include "../game_engine/GameScene.h"
+// #include "../examples/Pong-Like/game/PongGameScene.h"
 
 class SceneManager : public AbstractGameObject
 {
@@ -21,9 +22,11 @@ public:
     void setCurrentGameScene(String gameSceneName);
 
 private:
-    SceneManager() {}
+    SceneManager()
+    {
+    }
     static SceneManager *instance;
     std::map<String, GameScene *> gameScenes;
-    GameScene *currentGameScene;
+    GameScene *currentGameScene = nullptr;
 };
 #endif

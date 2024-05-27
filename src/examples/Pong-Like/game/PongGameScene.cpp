@@ -21,4 +21,12 @@ void PongGameScene::onExitScene()
 {
     Serial.println("Exiting " + getName());
 }
-void PongGameScene::onEnterScene() { Serial.println("Entering " + getName()); }
+void PongGameScene::onEnterScene()
+{
+    Serial.println("Entering " + getName());
+    // Reset the scores
+    scoreHandler->setLeftPlayerScore(0);
+    scoreHandler->setRightPlayerScore(0);
+    // scoreHandler->setWinner("");
+    //  Should reset the ball and paddles
+}

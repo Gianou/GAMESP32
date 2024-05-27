@@ -19,7 +19,7 @@
 #include "src/examples/Pong-Like/game/PongGameScene.h"
 
 #include "src/examples/Pong-Like/ui/StartUI.h"
-#include "src/examples/Pong-Like/ui/StartMenuGameScene.h"
+#include "src/examples/Pong-Like/ui/EndUI.h"
 
 Button buttonA = Button(BUTTON_A_PIN, "Button A");
 Button buttonB = Button(BUTTON_B_PIN, "Button B");
@@ -30,8 +30,10 @@ JoystickAxis yAxis = JoystickAxis(VRY, "Y axis");
 Adafruit_SSD1325 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 RenderEngine renderEngine = RenderEngine();
 PongGameScene pongGameScene = PongGameScene("Pong Game");
-StartMenuGameScene startMenuGameScene = StartMenuGameScene("Start");
+GameScene startMenuGameScene = GameScene("Start");
+GameScene endMenuGameScene = GameScene("End");
 StartUI startUI = StartUI();
+EndUI endUI = EndUI();
 GameEngine gameEngine = GameEngine();
 
 InputManager *inputManager = InputManager::getInstance();
@@ -63,16 +65,37 @@ void setup()
     pongGameScene.addGameObject(&paddleLeft);
     pongGameScene.addGameObject(&paddleRight);
     bounceSphere.setParentScene(&pongGameScene);
+    Serial.println("A");
 
     startMenuGameScene.addGameObject(&startUI);
+    Serial.println("B");
+
+    endMenuGameScene.addGameObject(&endUI);
+    Serial.println("C");
 
     sceneManager->addGameScene(&pongGameScene);
+    Serial.println("D");
+
     sceneManager->addGameScene(&startMenuGameScene);
+    Serial.println("E");
+
+    sceneManager->addGameScene(&endMenuGameScene);
+    Serial.println("F");
 
     sceneManager->setCurrentGameScene("Start");
+    Serial.println("G");
 
     gameEngine.addGameObject(sceneManager);
+    Serial.println("H");
+
+    // gameEngine.addGameObject(&pongGameScene); The pong scene does work
+
+    // startMenuGameScene.addGameObject(&startUI); startMenuGameScene with startUI works
+    // gameEngine.addGameObject(&startMenuGameScene);
+
+    // gameEngine.addGameObject(sceneManager); // looks like the issue came from calling a method on a null currentGameScene
     gameEngine.addGameObject(&renderEngine);
+    Serial.println("I");
 }
 
 void loop()

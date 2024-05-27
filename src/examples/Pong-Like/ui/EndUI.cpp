@@ -1,27 +1,28 @@
-#include "StartUI.h"
+#include "EndUI.h"
 
-StartUI::StartUI() {}
-void StartUI::update()
+EndUI::EndUI() {}
+void EndUI::update()
 {
     // instanciate and add UI object and Controller
     InputManager *inputManager = InputManager::getInstance();
     SceneManager *sceneManager = SceneManager::getInstance();
-    if (!inputManager->getInputValue("Button A"))
+    if (!inputManager->getInputValue("Button B"))
     {
-        sceneManager->setCurrentGameScene("Pong Game");
+        sceneManager->setCurrentGameScene("Start");
     }
 }
 
-void StartUI::render(Adafruit_SSD1325 &display)
+void EndUI::render(Adafruit_SSD1325 &display)
 {
+
     display.setTextSize(2);
     display.setTextColor(WHITE);
-    display.setCursor(20, 12);
-    display.println("Pong-Like");
+    display.setCursor(12, 12);
+    display.print("Game Over");
     display.setTextSize(1);
 
     display.setCursor(12, 38);
-    display.println("Press A");
+    display.println("Press B");
     display.setCursor(12, 46);
-    display.println("to start");
+    display.println("to go back");
 }

@@ -4,7 +4,6 @@ ScoreUI::ScoreUI(ScoreHandler *scoreHandler) : scoreHandler(scoreHandler) {}
 
 void ScoreUI::update()
 {
-    // Should be done by a controller class
 }
 
 void ScoreUI::render(Adafruit_SSD1325 &display)

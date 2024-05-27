@@ -13,12 +13,18 @@ SceneManager *SceneManager::getInstance()
 
 void SceneManager::update()
 {
-    currentGameScene->update();
+    if (currentGameScene != nullptr)
+    {
+        currentGameScene->update();
+    }
 }
 
 void SceneManager::render(Adafruit_SSD1325 &display)
 {
-    currentGameScene->render(display);
+    if (currentGameScene != nullptr)
+    {
+        currentGameScene->render(display);
+    }
 }
 
 void SceneManager::addGameScene(GameScene *scene)
@@ -39,7 +45,12 @@ void SceneManager::addGameScene(GameScene *scene)
 
 void SceneManager::setCurrentGameScene(GameScene *scene)
 {
+    if (currentGameScene != nullptr)
+    {
+        currentGameScene->onExitScene();
+    }
     currentGameScene = scene;
+    currentGameScene->onEnterScene();
 }
 
 void SceneManager::setCurrentGameScene(String gameSceneName)
@@ -50,5 +61,7 @@ void SceneManager::setCurrentGameScene(String gameSceneName)
         Serial.println("Error: Scene with name : " + gameSceneName + " not found");
         throw std::invalid_argument("Scene name not found");
     }
+    currentGameScene->onExitScene();
     currentGameScene = gameScenes[gameSceneName];
+    currentGameScene->onEnterScene();
 }
