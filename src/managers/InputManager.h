@@ -19,8 +19,8 @@ public:
 
 private:
     InputManager() {}
-    static InputManager *instance_;
-    std::map<String, AbstractInput *> inputMap_;
+    static InputManager *instance;
+    std::map<String, AbstractInput *> inputMap;
 };
 
 #endif

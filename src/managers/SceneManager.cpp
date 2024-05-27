@@ -1,14 +1,14 @@
 #include "SceneManager.h"
 
-SceneManager *SceneManager::instance_ = nullptr;
+SceneManager *SceneManager::instance = nullptr;
 
 SceneManager *SceneManager::getInstance()
 {
-    if (instance_ == nullptr)
+    if (instance == nullptr)
     {
-        instance_ = new SceneManager();
+        instance = new SceneManager();
     }
-    return instance_;
+    return instance;
 }
 
 void SceneManager::update()
@@ -24,17 +24,17 @@ void SceneManager::render(Adafruit_SSD1325 &display)
 void SceneManager::addGameScene(GameScene *scene)
 {
 
-    if (gamesScenes.find(scene->getName()) != gamesScenes.end())
+    if (gameScenes.find(scene->getName()) != gameScenes.end())
     {
         Serial.println("Error: Scene with the same name already exists.");
         throw std::invalid_argument("Scene with the same name already exists.");
     }
     // set scene as current if it is the only scene
-    if (gamesScenes.empty())
+    if (gameScenes.empty())
     {
         setCurrentGameScene(scene);
     }
-    gamesScenes[scene->getName()] = scene;
+    gameScenes[scene->getName()] = scene;
 }
 
 void SceneManager::setCurrentGameScene(GameScene *scene)
@@ -45,10 +45,10 @@ void SceneManager::setCurrentGameScene(GameScene *scene)
 void SceneManager::setCurrentGameScene(String gameSceneName)
 {
     // Check if a GameScene exits for gameSceneName
-    if (gamesScenes.find(gameSceneName) == gamesScenes.end())
+    if (gameScenes.find(gameSceneName) == gameScenes.end())
     {
         Serial.println("Error: Scene with name : " + gameSceneName + " not found");
         throw std::invalid_argument("Scene name not found");
     }
-    currentGameScene = gamesScenes[gameSceneName];
+    currentGameScene = gameScenes[gameSceneName];
 }

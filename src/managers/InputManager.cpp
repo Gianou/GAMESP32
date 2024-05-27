@@ -1,24 +1,24 @@
 #include "InputManager.h"
 
-InputManager *InputManager::instance_ = nullptr;
+InputManager *InputManager::instance = nullptr;
 
 InputManager *InputManager::getInstance()
 {
-    if (instance_ == nullptr)
+    if (instance == nullptr)
     {
-        instance_ = new InputManager();
+        instance = new InputManager();
     }
-    return instance_;
+    return instance;
 }
 
 void InputManager::addInput(AbstractInput *input)
 {
-    if (inputMap_.find(input->getName()) != inputMap_.end())
+    if (inputMap.find(input->getName()) != inputMap.end())
     {
         Serial.println("Error: Input with the same name already exists.");
         throw std::invalid_argument("Input with the same name already exists.");
     }
-    inputMap_[input->getName()] = input;
+    inputMap[input->getName()] = input;
     input->begin();
 }
 
@@ -32,13 +32,13 @@ void InputManager::addInputs(std::initializer_list<AbstractInput *> inputs)
 
 void InputManager::removeInput(const String &name)
 {
-    inputMap_.erase(name);
+    inputMap.erase(name);
 }
 
 int InputManager::getInputValue(const String &name)
 {
-    auto it = inputMap_.find(name);
-    if (it != inputMap_.end())
+    auto it = inputMap.find(name);
+    if (it != inputMap.end())
     {
         return it->second->getValue();
     }

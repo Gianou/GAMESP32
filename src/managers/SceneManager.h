@@ -22,8 +22,8 @@ public:
 
 private:
     SceneManager() {}
-    static SceneManager *instance_;
-    std::map<String, GameScene *> gamesScenes;
+    static SceneManager *instance;
+    std::map<String, GameScene *> gameScenes;
     GameScene *currentGameScene;
 };
 #endif

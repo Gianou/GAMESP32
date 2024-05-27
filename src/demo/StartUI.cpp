@@ -16,10 +16,12 @@ void StartUI::render(Adafruit_SSD1325 &display)
 {
     display.setTextSize(2);
     display.setTextColor(WHITE);
-    display.setCursor(24, 12);
+    display.setCursor(20, 12);
     display.println("Pong-Like");
     display.setTextSize(1);
 
     display.setCursor(12, 38);
-    display.println("Press a button to start");
+    display.println("Press a button");
+    display.setCursor(12, 46);
+    display.println("to start");
 }
