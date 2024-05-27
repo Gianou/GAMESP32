@@ -1,7 +1,7 @@
 #ifndef Score_UI_H
 #define Score_UI_H
 
-#include "../game_engine/AbstractGameObject.h"
+#include "../../../game_engine/AbstractGameObject.h"
 #include "ScoreHandler.h"
 
 class ScoreUI : public AbstractGameObject

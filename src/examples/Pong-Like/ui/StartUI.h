@@ -1,10 +1,10 @@
 #ifndef Start_UI_H
 #define Start_UI_H
 
-#include "../game_engine/AbstractGameObject.h"
+#include "../../../game_engine/AbstractGameObject.h"
 
-#include "../managers/InputManager.h"
-#include "../managers/SceneManager.h"
+#include "../../../managers/InputManager.h"
+#include "../../../managers/SceneManager.h"
 
 class StartUI : public AbstractGameObject
 {

@@ -1,10 +1,10 @@
 #ifndef Bounce_Sphere_H
 #define Bounce_Sphere_H
 
-#include "../game_engine/AbstractGameObject.h"
+#include "../../../game_engine/AbstractGameObject.h"
 #include "PongGameScene.h"
-#include "../game_engine/CollisionDetector.h"
-#include "../../config/Constants.h"
+#include "../../../game_engine/CollisionDetector.h"
+#include "../../../../config/Constants.h"
 
 class BounceSphere : public AbstractGameObject
 {

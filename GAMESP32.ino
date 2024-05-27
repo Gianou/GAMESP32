@@ -13,12 +13,13 @@
 #include "src/game_engine/GameEngine.h"
 #include "src/game_engine/GameScene.h"
 
-#include "src/examples/BounceSphere.h"
-#include "src/examples/PaddleLeft.h"
-#include "src/examples/PaddleRight.h"
-#include "src/examples/PongGameScene.h"
-#include "src/examples/StartUI.h"
-#include "src/examples/StartMenuGameScene.h"
+#include "src/examples/Pong-Like/game/BounceSphere.h"
+#include "src/examples/Pong-Like/game/PaddleLeft.h"
+#include "src/examples/Pong-Like/game/PaddleRight.h"
+#include "src/examples/Pong-Like/game/PongGameScene.h"
+
+#include "src/examples/Pong-Like/ui/StartUI.h"
+#include "src/examples/Pong-Like/ui/StartMenuGameScene.h"
 
 Button buttonA = Button(BUTTON_A_PIN, "Button A");
 Button buttonB = Button(BUTTON_B_PIN, "Button B");

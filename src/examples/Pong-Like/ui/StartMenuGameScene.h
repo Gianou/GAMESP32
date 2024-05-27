@@ -1,7 +1,7 @@
 #ifndef Start_Menu_Game_Scene_H
 #define Start_Menu_Game_Scene_H
 
-#include "../game_engine/GameScene.h"
+#include "../../../game_engine/GameScene.h"
 
 class StartMenuGameScene : public GameScene
 {
