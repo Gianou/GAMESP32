@@ -1,9 +1,9 @@
 #ifndef Paddle_Right_H
 #define Paddle_Right_H
 
-#include "../game_engine/AbstractGameObject.h"
-#include "../managers/InputManager.h"
-#include "../../config/Constants.h"
+#include "../../../game_engine/AbstractGameObject.h"
+#include "../../../managers/InputManager.h"
+#include "../../../../config/Constants.h"
 
 class PaddleRight : public AbstractGameObject
 {

@@ -8,14 +8,18 @@
 #include "src/components/Button.h"
 #include "src/components/JoystickAxis.h"
 #include "src/managers/InputManager.h"
+#include "src/managers/SceneManager.h"
 #include "src/game_engine/RenderEngine.h"
 #include "src/game_engine/GameEngine.h"
 #include "src/game_engine/GameScene.h"
 
-#include "src/demo/BounceSphere.h"
-#include "src/demo/PaddleLeft.h"
-#include "src/demo/PaddleRight.h"
-#include "src/demo/PongGameScene.h"
+#include "src/examples/Pong-Like/game/BounceSphere.h"
+#include "src/examples/Pong-Like/game/PaddleLeft.h"
+#include "src/examples/Pong-Like/game/PaddleRight.h"
+#include "src/examples/Pong-Like/game/PongGameScene.h"
+
+#include "src/examples/Pong-Like/ui/StartUI.h"
+#include "src/examples/Pong-Like/ui/EndUI.h"
 
 Button buttonA = Button(BUTTON_A_PIN, "Button A");
 Button buttonB = Button(BUTTON_B_PIN, "Button B");
@@ -25,10 +29,15 @@ JoystickAxis yAxis = JoystickAxis(VRY, "Y axis");
 
 Adafruit_SSD1325 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 RenderEngine renderEngine = RenderEngine();
-PongGameScene gameScene = PongGameScene();
+PongGameScene pongGameScene = PongGameScene("Pong Game");
+GameScene startMenuGameScene = GameScene("Start");
+GameScene endMenuGameScene = GameScene("End");
+StartUI startUI = StartUI();
+EndUI endUI = EndUI();
 GameEngine gameEngine = GameEngine();
 
 InputManager *inputManager = InputManager::getInstance();
+SceneManager *sceneManager = SceneManager::getInstance();
 
 // BounceSphere
 int radius = 3;
@@ -50,14 +59,30 @@ PaddleRight paddleRight = PaddleRight(SCREEN_WIDTH - paddleX + paddleWidth, padd
 void setup()
 {
     Serial.begin(115200);
+
+    // Add all the inputs to the InputManager
     inputManager->addInputs({&buttonA, &buttonB, &buttonSW, &xAxis, &yAxis});
 
-    gameScene.addGameObject(&bounceSphere);
-    gameScene.addGameObject(&paddleLeft);
-    gameScene.addGameObject(&paddleRight);
-    bounceSphere.setParentScene(&gameScene);
+    // Add all the game objects to pongGameScene
+    pongGameScene.addGameObject(&bounceSphere);
+    pongGameScene.addGameObject(&paddleLeft);
+    pongGameScene.addGameObject(&paddleRight);
+    bounceSphere.setParentScene(&pongGameScene);
 
-    gameEngine.addGameObject(&gameScene);
+    // Add all the game objects to startMenuGameScene
+    startMenuGameScene.addGameObject(&startUI);
+
+    // Add all the game objects to endMenuGameScene
+    endMenuGameScene.addGameObject(&endUI);
+
+    // Add all the GameScenes to the sceneManager and set default one
+    sceneManager->addGameScene(&pongGameScene);
+    sceneManager->addGameScene(&startMenuGameScene);
+    sceneManager->addGameScene(&endMenuGameScene);
+    sceneManager->setCurrentGameScene("Start");
+
+    // Add sceneManager and renderEngine to the gameEngine
+    gameEngine.addGameObject(sceneManager);
     gameEngine.addGameObject(&renderEngine);
 }
 
