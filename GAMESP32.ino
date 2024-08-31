@@ -44,7 +44,7 @@ InputManager *inputManager = InputManager::getInstance();
 SceneManager *sceneManager = SceneManager::getInstance();
 
 // Initialize game objects
-Snake snake = Snake(10, 10, 4, 6, 12); // Start with length 1
+Snake snake = Snake(10, 10, 3, 6, 12); // Start with length 1
 Food food = Food(110, 40, 4);          // Initial food position (can be random later)
 
 void setup()
