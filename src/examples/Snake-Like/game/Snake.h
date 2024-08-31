@@ -8,7 +8,7 @@
 class Snake : public AbstractGameObject
 {
 public:
-    Snake(int startX, int startY, int segmentSize);
+    Snake(int startX, int startY, int segmentSize, int length, int speed);
     void update() override;
     void render(Adafruit_SSD1325 &display) override;
     void grow();
@@ -17,7 +17,7 @@ public:
 
 private:
     std::vector<SnakeSegment *> segments;
-    int directionX, directionY, segmentSize;
+    int directionX, directionY, segmentSize, length, speed;
     int framesSinceLastMove;
 };
 

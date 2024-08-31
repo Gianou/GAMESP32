@@ -1,15 +1,20 @@
 #include "Snake.h"
 #include "../../../managers/InputManager.h"
 
-Snake::Snake(int startX, int startY, int segmentSize) : directionX(1), directionY(0), segmentSize(segmentSize), framesSinceLastMove(0)
+Snake::Snake(int startX, int startY, int segmentSize, int length, int speed) : directionX(1), directionY(0), segmentSize(segmentSize), length(length), framesSinceLastMove(0), speed(speed)
 {
     segments.push_back(new SnakeSegment(startX, startY, segmentSize));
+    for (int i = 0; i < length; i++)
+    {
+        grow();
+    }
 }
 
 void Snake::update()
 {
     InputManager *inputManager = InputManager::getInstance();
 
+    // Handling the direction based on input
     if (inputManager->getInputValue("X axis") > 2000)
     {
         directionX = 1;
@@ -31,27 +36,21 @@ void Snake::update()
         directionY = -1;
     }
 
-    framesSinceLastMove++;
-    if (framesSinceLastMove >= 5)
-    { // Adjust this value to change the speed
-        framesSinceLastMove = 0;
-
-        // Move the segments from tail to head
-        for (int i = segments.size() - 1; i > 0; i--)
-        {
-            segments[i]->setPosition(segments[i - 1]->getX(), segments[i - 1]->getY());
-        }
-
-        // Move the head
-        segments[0]->setPosition(segments[0]->getX() + directionX * segmentSize, segments[0]->getY() + directionY * segmentSize);
-
-        // Check for self-collision
-        if (checkSelfCollision())
-        {
-            // Handle game over
-            // Switch to End Scene
-        }
+    // Move the segments from tail to head
+    for (int i = segments.size() - 1; i > 0; i--)
+    {
+        segments[i]->setPosition(segments[i - 1]->getX(), segments[i - 1]->getY());
     }
+
+    // Move the head
+    segments[0]->setPosition(segments[0]->getX() + directionX * segmentSize, segments[0]->getY() + directionY * segmentSize);
+
+    // Check for self-collision
+    // if (checkSelfCollision())
+    // {
+    //     // Handle game over
+    //     SceneManager::getInstance()->setCurrentGameScene("End");
+    // }
 }
 
 void Snake::render(Adafruit_SSD1325 &display)
@@ -65,8 +64,12 @@ void Snake::render(Adafruit_SSD1325 &display)
 void Snake::grow()
 {
     SnakeSegment *tail = segments.back();
+
+    // Calculate the position for the new segment based on the current direction
     int newX = tail->getX() - directionX * segmentSize;
     int newY = tail->getY() - directionY * segmentSize;
+
+    // Add the new segment at the calculated position
     segments.push_back(new SnakeSegment(newX, newY, segmentSize));
 }
 
