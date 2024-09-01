@@ -11,6 +11,7 @@ public:
     void update() override;
     void render(Adafruit_SSD1325 &display) override;
     void respawn();
+    HitBox *getHitBox() override { return hitBox; };
 
 private:
     int x, y, size;

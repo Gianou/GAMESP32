@@ -45,7 +45,7 @@ SceneManager *sceneManager = SceneManager::getInstance();
 
 // Initialize game objects
 Snake snake = Snake(10, 10, 3, 6, 12); // Start with length 1
-Food food = Food(110, 40, 4);          // Initial food position (can be random later)
+Food food = Food(40, 10, 3);           // Initial food position
 
 void setup()
 {
@@ -56,6 +56,7 @@ void setup()
 
     // Add all the game objects to snakeGameScene
     snakeGameScene.addGameObject(&snake);
+    snake.setParentScene(&snakeGameScene);
     snakeGameScene.addGameObject(&food);
 
     // Add all the game objects to startMenuGameScene

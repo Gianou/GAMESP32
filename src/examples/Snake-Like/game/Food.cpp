@@ -7,7 +7,6 @@ Food::Food(int x, int y, int size) : x(x), y(y), size(size)
 
 void Food::update()
 {
-    // No movement or updates needed for the food, but we keep the method for consistency
 }
 
 void Food::render(Adafruit_SSD1325 &display)

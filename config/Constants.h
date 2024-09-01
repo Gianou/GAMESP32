@@ -8,7 +8,7 @@ const int VRX = 2;
 const int VRY = 1;
 const int SW = 39;
 
-const int FRAME_DURATION_MS = 0;
+const int FRAME_DURATION_MS = 42;
 const int SCREEN_WIDTH = 128;
 const int SCREEN_HEIGHT = 64;
 

@@ -7,12 +7,14 @@ boolean CollisionDetector::checkCollision(AbstractGameObject *callerGameObject, 
 
     if (!callerGameObject->getHitBox() || !gameObject->getHitBox())
     {
+        Serial.println("No collision detection, missing hitbox");
         return false;
     }
 
     // Check if callerGameObject and gameObject are the same object
     if (callerGameObject == gameObject)
     {
+        Serial.println("No collision detection, identical gameobjects");
         return false;
     }
 

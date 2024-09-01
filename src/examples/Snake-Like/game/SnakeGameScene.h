@@ -5,9 +5,6 @@
 #include "../../../managers/SceneManager.h"
 #include "../../../game_engine/CollisionDetector.h"
 
-#include "Snake.h"
-#include "Food.h"
-
 class SnakeGameScene : public GameScene
 {
 public:
@@ -16,9 +13,9 @@ public:
     void render(Adafruit_SSD1325 &display) override;
     void endGame();
 
+    CollisionDetector *getCollisionDetector();
+
 private:
-    Snake *snake;
-    Food *food;
     int score;
     CollisionDetector *collisionDetector;
 };

@@ -8,21 +8,11 @@ SnakeGameScene::SnakeGameScene(String name) : GameScene(name), score(0)
 void SnakeGameScene::update()
 {
     GameScene::update();
+}
 
-    // Check for collision between the snake's head and the food
-    // if (collisionDetector->checkCollision(food, food))
-    // {
-    //     // Snake eats the food
-    //     // snake->grow();
-    //     // food->respawn();
-    // }
-
-    // Check for self-collision
-    // if (snake->checkSelfCollision())
-    // {
-    //     // End the game
-    //     endGame();
-    // }
+CollisionDetector *SnakeGameScene::getCollisionDetector()
+{
+    return collisionDetector;
 }
 
 void SnakeGameScene::endGame()

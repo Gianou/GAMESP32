@@ -13,6 +13,7 @@ public:
     void setPosition(int x, int y);
     int getX();
     int getY();
+    HitBox *getHitBox() override { return hitBox; };
 
 private:
     int x, y, size;
