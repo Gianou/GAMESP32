@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "SnakeSegment.h"
-// #include "SnakeGameScene.h"
+#include "../../../managers/SceneManager.h"
 #include "../../../game_engine/AbstractGameObject.h"
 #include "../../../game_engine/CollisionDetector.h"
 
@@ -13,18 +13,15 @@ public:
     Snake(int startX, int startY, int segmentSize, int length, int speed);
     void update() override;
     void render(Adafruit_SSD1325 &display) override;
-    void grow();
-    bool checkSelfCollision();
     SnakeSegment *getHead();
-
-    // void setParentScene(SnakeGameScene *parent);
-    // SnakeGameScene *getParentScene();
+    void grow();
 
 private:
     std::vector<SnakeSegment *> segments;
     int directionX, directionY, segmentSize, length, speed;
     int framesSinceLastMove;
-    // SnakeGameScene *parent;
+    void endGame();
+    void checkSelfCollision();
 };
 
 #endif

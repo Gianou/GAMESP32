@@ -12,29 +12,30 @@ Snake::Snake(int startX, int startY, int segmentSize, int length, int speed) : d
 
 void Snake::update()
 {
+    // updates the segments to keep the hitboxes in the right spot
     for (auto segment : segments)
     {
         segment->update();
     }
-    InputManager *inputManager = InputManager::getInstance();
 
     // Handling the direction based on input
-    if (inputManager->getInputValue("X axis") > 2000)
+    InputManager *inputManager = InputManager::getInstance();
+    if (inputManager->getInputValue("X axis") > 2000 && directionX != -1)
     {
         directionX = 1;
         directionY = 0;
     }
-    else if (inputManager->getInputValue("X axis") < 1900)
+    else if (inputManager->getInputValue("X axis") < 1900 && directionX != 1)
     {
         directionX = -1;
         directionY = 0;
     }
-    else if (inputManager->getInputValue("Y axis") > 2000)
+    else if (inputManager->getInputValue("Y axis") > 2000 && directionY != -1)
     {
         directionX = 0;
         directionY = 1;
     }
-    else if (inputManager->getInputValue("Y axis") < 1900)
+    else if (inputManager->getInputValue("Y axis") < 1900 && directionY != 1)
     {
         directionX = 0;
         directionY = -1;
@@ -49,16 +50,7 @@ void Snake::update()
     // Move the head
     segments[0]->setPosition(segments[0]->getX() + directionX * segmentSize, segments[0]->getY() + directionY * segmentSize);
 
-    // CollisionDetector *collisionDetector = getParentScene()->getCollisionDetector();
-    // std::vector<AbstractGameObject *> sceneGameObjects = getParentScene()->getChildren();
-    // for (AbstractGameObject *gameObject : sceneGameObjects)
-    // {
-    //     if (collisionDetector->checkCollision(getHead(), gameObject))
-    //     {
-    //         Serial.println("Collision detected");
-    //         grow();
-    //     }
-    // }
+    checkSelfCollision();
 }
 
 void Snake::render(Adafruit_SSD1325 &display)
@@ -81,17 +73,17 @@ void Snake::grow()
     segments.push_back(new SnakeSegment(newX, newY, segmentSize));
 }
 
-bool Snake::checkSelfCollision()
+void Snake::checkSelfCollision()
 {
     SnakeSegment *head = segments[0];
     for (int i = 1; i < segments.size(); i++)
     {
         if (head->getX() == segments[i]->getX() && head->getY() == segments[i]->getY())
         {
-            return true;
+            endGame();
+            return;
         }
     }
-    return false;
 }
 
 SnakeSegment *Snake::getHead()
@@ -99,12 +91,8 @@ SnakeSegment *Snake::getHead()
     return segments[0];
 }
 
-// void Snake::setParentScene(SnakeGameScene *parent)
-// {
-//     this->parent = parent;
-// }
-
-// SnakeGameScene *Snake::getParentScene()
-// {
-//     return parent;
-// }
+void Snake::endGame()
+{
+    SceneManager *sceneManager = SceneManager::getInstance();
+    sceneManager->setCurrentGameScene("End");
+}

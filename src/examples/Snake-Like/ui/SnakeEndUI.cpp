@@ -6,9 +6,10 @@ void SnakeEndUI::update()
 {
     // Return to the start menu when a button is pressed
     InputManager *inputManager = InputManager::getInstance();
-    if (inputManager->getInputValue("StartButton") > 0)
+    SceneManager *sceneManager = SceneManager::getInstance();
+    if (!inputManager->getInputValue("Button B"))
     {
-        SceneManager::getInstance()->setCurrentGameScene("SnakeStartUI");
+        sceneManager->setCurrentGameScene("Start");
     }
 }
 

@@ -16,8 +16,6 @@ void SnakeGameScene::update()
         snake->grow();
         food->respawn();
     }
-    // call grow on snake
-    // call move on food
 }
 
 CollisionDetector *SnakeGameScene::getCollisionDetector()
