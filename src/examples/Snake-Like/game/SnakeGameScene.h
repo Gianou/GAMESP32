@@ -24,7 +24,7 @@ public:
 private:
     Snake *snake;
     Food *food;
-    int score;
+    int score, displayScore;
     int arenaX, arenaY, arenaWidth, arenaHeight;
     CollisionDetector *collisionDetector;
 };

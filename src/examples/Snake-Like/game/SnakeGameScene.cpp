@@ -16,7 +16,15 @@ void SnakeGameScene::update()
         Serial.println("Collision");
         snake->grow();
         food->respawn();
-        score++;
+        score += 1;
+    }
+    if (displayScore < score * 100)
+    {
+        displayScore += 3;
+        if (displayScore > score * 100)
+        {
+            displayScore = score * 100;
+        }
     }
     // Check if snake goes out of bound
     if (
@@ -49,13 +57,14 @@ void SnakeGameScene::render(Adafruit_SSD1325 &display)
     display.setTextSize(1);
     display.setCursor(0, 0);
     display.print("Score: ");
-    display.print(score);
+    display.print(displayScore);
 }
 
 void SnakeGameScene::onEnterScene()
 {
     Serial.println("Entering " + getName());
     score = 0;
+    displayScore = 0;
     snake->reset();
     food->reset();
 }
