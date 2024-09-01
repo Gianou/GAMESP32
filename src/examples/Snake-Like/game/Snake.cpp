@@ -3,6 +3,9 @@
 
 Snake::Snake(int startX, int startY, int segmentSize, int length, int speed) : directionX(1), directionY(0), segmentSize(segmentSize), length(length), framesSinceLastMove(0), speed(speed)
 {
+    initialX = startX;
+    initialY = startY;
+    initialLength = length;
     segments.push_back(new SnakeSegment(startX, startY, segmentSize));
     for (int i = 0; i < length; i++)
     {
@@ -95,4 +98,26 @@ void Snake::endGame()
 {
     SceneManager *sceneManager = SceneManager::getInstance();
     sceneManager->setCurrentGameScene("End");
+}
+
+void Snake::reset()
+{
+    // Reset the direction to the default starting direction
+    directionX = 1; // or whatever your initial direction is
+    directionY = 0;
+    // Delete all elements of the segments vector
+    for (SnakeSegment *segment : segments)
+    {
+        delete segment; // Free the memory allocated for each segment
+    }
+    segments.clear(); // Clear the vector to remove all pointers
+
+    // Create the head at initialX and initialY
+    SnakeSegment *head = new SnakeSegment(initialX, initialY, segmentSize);
+    segments.push_back(head);
+    // create head at initialX and initialY
+    for (int i = 0; i < initialLength; i++)
+    {
+        grow();
+    }
 }

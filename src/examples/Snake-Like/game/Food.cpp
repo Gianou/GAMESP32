@@ -2,6 +2,8 @@
 
 Food::Food(int x, int y, int size) : x(x), y(y), size(size)
 {
+    initialX = x;
+    initialY = y;
     hitBox = new HitBox(x, y, size, size);
 }
 
@@ -19,6 +21,14 @@ void Food::respawn()
     // Respawn food at a random position within screen bounds
     x = random(0, SCREEN_WIDTH / size) * size;
     y = random(0, SCREEN_HEIGHT / size) * size;
+    hitBox->setX(x);
+    hitBox->setY(y);
+}
+
+void Food::reset()
+{
+    x = initialX;
+    y = initialY;
     hitBox->setX(x);
     hitBox->setY(y);
 }

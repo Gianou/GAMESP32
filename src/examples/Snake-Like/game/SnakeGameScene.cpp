@@ -1,6 +1,7 @@
 #include "SnakeGameScene.h"
 
-SnakeGameScene::SnakeGameScene(String name) : GameScene(name), score(0)
+SnakeGameScene::SnakeGameScene(String name, int x, int y, int width, int height)
+    : GameScene(name), arenaX(x), arenaY(y), arenaWidth(width), arenaHeight(height), score(0)
 {
     collisionDetector = new CollisionDetector();
 }
@@ -15,6 +16,7 @@ void SnakeGameScene::update()
         Serial.println("Collision");
         snake->grow();
         food->respawn();
+        score++;
     }
 }
 
@@ -32,8 +34,19 @@ void SnakeGameScene::endGame()
 void SnakeGameScene::render(Adafruit_SSD1325 &display)
 {
     GameScene::render(display);
-    // Optionally render the score
-    // display.setCursor(0, 0);
-    // display.print("Score: ");
-    // display.print(score);
+    // Draw arena
+    display.drawRect(arenaX, arenaY, arenaWidth, arenaHeight, WHITE);
+    // Render the score
+    display.setTextSize(1);
+    display.setCursor(0, 0);
+    display.print("Score: ");
+    display.print(score);
+}
+
+void SnakeGameScene::onEnterScene()
+{
+    Serial.println("Entering " + getName());
+    score = 0;
+    snake->reset();
+    food->reset();
 }

@@ -10,7 +10,7 @@
 class SnakeGameScene : public GameScene
 {
 public:
-    SnakeGameScene(String name);
+    SnakeGameScene(String name, int x, int y, int width, int height);
     void update() override;
     void render(Adafruit_SSD1325 &display) override;
     void endGame();
@@ -19,10 +19,13 @@ public:
     void setSnake(Snake *newSnake) { snake = newSnake; };
     void setFood(Food *newFood) { food = newFood; };
 
+    void onEnterScene() override;
+
 private:
     Snake *snake;
     Food *food;
     int score;
+    int arenaX, arenaY, arenaWidth, arenaHeight;
     CollisionDetector *collisionDetector;
 };
 

@@ -33,7 +33,7 @@ RenderEngine renderEngine = RenderEngine();
 GameEngine gameEngine = GameEngine();
 
 // Initialize scenes
-SnakeGameScene snakeGameScene = SnakeGameScene("Snake Game");
+SnakeGameScene snakeGameScene = SnakeGameScene("Snake Game", 6, 10, 115, 50);
 GameScene startMenuGameScene = GameScene("Start");
 GameScene endMenuGameScene = GameScene("End");
 SnakeStartUI startUI = SnakeStartUI();
@@ -44,8 +44,8 @@ InputManager *inputManager = InputManager::getInstance();
 SceneManager *sceneManager = SceneManager::getInstance();
 
 // Initialize game objects
-Snake snake = Snake(10, 10, 3, 6, 12); // Start with length 1
-Food food = Food(40, 10, 3);           // Initial food position
+Snake snake = Snake(25, 17, 3, 6, 12); // Start with length 1
+Food food = Food(40, 38, 3);           // Initial food position
 
 void setup()
 {
