@@ -56,8 +56,9 @@ void setup()
 
     // Add all the game objects to snakeGameScene
     snakeGameScene.addGameObject(&snake);
-    snake.setParentScene(&snakeGameScene);
     snakeGameScene.addGameObject(&food);
+    snakeGameScene.setSnake(&snake);
+    snakeGameScene.setFood(&food);
 
     // Add all the game objects to startMenuGameScene
     startMenuGameScene.addGameObject(&startUI);

@@ -8,6 +8,16 @@ SnakeGameScene::SnakeGameScene(String name) : GameScene(name), score(0)
 void SnakeGameScene::update()
 {
     GameScene::update();
+
+    // Check collision between snake and food
+    if (collisionDetector->checkCollision(snake->getHead(), food))
+    {
+        Serial.println("Collision");
+        snake->grow();
+        food->respawn();
+    }
+    // call grow on snake
+    // call move on food
 }
 
 CollisionDetector *SnakeGameScene::getCollisionDetector()

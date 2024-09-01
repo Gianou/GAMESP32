@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "SnakeSegment.h"
-#include "SnakeGameScene.h"
+// #include "SnakeGameScene.h"
 #include "../../../game_engine/AbstractGameObject.h"
 #include "../../../game_engine/CollisionDetector.h"
 
@@ -17,14 +17,14 @@ public:
     bool checkSelfCollision();
     SnakeSegment *getHead();
 
-    void setParentScene(SnakeGameScene *parent);
-    SnakeGameScene *getParentScene();
+    // void setParentScene(SnakeGameScene *parent);
+    // SnakeGameScene *getParentScene();
 
 private:
     std::vector<SnakeSegment *> segments;
     int directionX, directionY, segmentSize, length, speed;
     int framesSinceLastMove;
-    SnakeGameScene *parent;
+    // SnakeGameScene *parent;
 };
 
 #endif

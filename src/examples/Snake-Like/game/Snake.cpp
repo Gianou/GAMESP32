@@ -49,42 +49,16 @@ void Snake::update()
     // Move the head
     segments[0]->setPosition(segments[0]->getX() + directionX * segmentSize, segments[0]->getY() + directionY * segmentSize);
 
-    CollisionDetector *collisionDetector = getParentScene()->getCollisionDetector();
-    std::vector<AbstractGameObject *> sceneGameObjects = getParentScene()->getChildren();
-    for (AbstractGameObject *gameObject : sceneGameObjects)
-    {
-        if (collisionDetector->checkCollision(getHead(), gameObject))
-        {
-            Serial.println("Collision detected");
-            grow();
-        }
-        if (gameObject->getHitBox() != nullptr)
-        {
-            Serial.println(
-                "Food X:" + String(gameObject->getHitBox()->getX()) +
-                "Food Y:" + String(gameObject->getHitBox()->getY())
-
-            );
-        }
-        if (getHead() != nullptr)
-        {
-            if (getHead()->getHitBox() != nullptr)
-            {
-                Serial.println(
-                    "Head X: " + String(getHead()->getHitBox()->getX()) +
-                    " Head Y: " + String(getHead()->getHitBox()->getY()));
-            }
-            else
-            {
-                Serial.println("Error: Head's HitBox is nullptr");
-            }
-        }
-        else
-        {
-            Serial.println("Error: Snake's Head is nullptr");
-        }
-    }
-    Serial.println("");
+    // CollisionDetector *collisionDetector = getParentScene()->getCollisionDetector();
+    // std::vector<AbstractGameObject *> sceneGameObjects = getParentScene()->getChildren();
+    // for (AbstractGameObject *gameObject : sceneGameObjects)
+    // {
+    //     if (collisionDetector->checkCollision(getHead(), gameObject))
+    //     {
+    //         Serial.println("Collision detected");
+    //         grow();
+    //     }
+    // }
 }
 
 void Snake::render(Adafruit_SSD1325 &display)
@@ -125,12 +99,12 @@ SnakeSegment *Snake::getHead()
     return segments[0];
 }
 
-void Snake::setParentScene(SnakeGameScene *parent)
-{
-    this->parent = parent;
-}
+// void Snake::setParentScene(SnakeGameScene *parent)
+// {
+//     this->parent = parent;
+// }
 
-SnakeGameScene *Snake::getParentScene()
-{
-    return parent;
-}
+// SnakeGameScene *Snake::getParentScene()
+// {
+//     return parent;
+// }
