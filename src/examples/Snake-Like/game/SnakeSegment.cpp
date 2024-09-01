@@ -32,3 +32,8 @@ int SnakeSegment::getY()
 {
     return y;
 }
+
+int SnakeSegment::getSize()
+{
+    return size;
+}

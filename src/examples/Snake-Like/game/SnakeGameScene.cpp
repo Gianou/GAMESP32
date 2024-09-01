@@ -18,6 +18,15 @@ void SnakeGameScene::update()
         food->respawn();
         score++;
     }
+    // Check if snake goes out of bound
+    if (
+        snake->getHead()->getX() < arenaX ||
+        snake->getHead()->getX() + snake->getHead()->getSize() > arenaX + arenaWidth ||
+        snake->getHead()->getY() < arenaY ||
+        snake->getHead()->getY() + snake->getHead()->getSize() > arenaY + arenaHeight)
+    {
+        snake->endGame();
+    }
 }
 
 CollisionDetector *SnakeGameScene::getCollisionDetector()

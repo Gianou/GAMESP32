@@ -16,13 +16,13 @@ public:
     SnakeSegment *getHead();
     void reset();
     void grow();
+    void endGame();
 
 private:
     std::vector<SnakeSegment *> segments;
     int initialX, initialY, initialLength;
     int directionX, directionY, segmentSize, length, speed;
     int framesSinceLastMove;
-    void endGame();
     void checkSelfCollision();
 };
 
