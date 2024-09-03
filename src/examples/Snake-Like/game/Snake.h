@@ -14,6 +14,7 @@ public:
     void update() override;
     void render(Adafruit_SSD1325 &display) override;
     SnakeSegment *getHead();
+    std::vector<SnakeSegment *> getSegments() { return segments; }
     void reset();
     void grow();
     void endGame();

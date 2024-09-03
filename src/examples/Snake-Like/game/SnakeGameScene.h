@@ -18,8 +18,10 @@ public:
     CollisionDetector *getCollisionDetector();
     void setSnake(Snake *newSnake) { snake = newSnake; };
     void setFood(Food *newFood) { food = newFood; };
+    void respawnFood();
 
-    void onEnterScene() override;
+    void
+    onEnterScene() override;
 
 private:
     Snake *snake;

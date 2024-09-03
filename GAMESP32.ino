@@ -31,9 +31,11 @@ Adafruit_SSD1325 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 // Initialize core components
 RenderEngine renderEngine = RenderEngine();
 GameEngine gameEngine = GameEngine();
+int arenaX = 6;
+int arenaY = 10;
 
 // Initialize scenes
-SnakeGameScene snakeGameScene = SnakeGameScene("Snake Game", 6, 10, 115, 50);
+SnakeGameScene snakeGameScene = SnakeGameScene("Snake Game", arenaX, arenaY, 115, 50);
 GameScene startMenuGameScene = GameScene("Start");
 GameScene endMenuGameScene = GameScene("End");
 SnakeStartUI startUI = SnakeStartUI();
@@ -46,6 +48,7 @@ SceneManager *sceneManager = SceneManager::getInstance();
 // Initialize game objects
 Snake snake = Snake(25, 17, 3, 6, 12); // Start with length 1
 Food food = Food(40, 38, 3);           // Initial food position
+// Food food = Food(arenaX + 1, arenaY + 1, 3); // Initial food position
 
 void setup()
 {

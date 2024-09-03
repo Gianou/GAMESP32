@@ -10,9 +10,10 @@ public:
     Food(int x, int y, int size);
     void update() override;
     void render(Adafruit_SSD1325 &display) override;
-    void respawn();
+    void respawn(int newX, int newY);
     void reset();
     HitBox *getHitBox() override { return hitBox; };
+    int getSize() { return size; }
 
 private:
     int x, y, size;

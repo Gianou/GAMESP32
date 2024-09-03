@@ -16,11 +16,11 @@ void Food::render(Adafruit_SSD1325 &display)
     display.fillRect(x, y, size, size, WHITE);
 }
 
-void Food::respawn()
+void Food::respawn(int newX, int newY)
 {
     // Respawn food at a random position within screen bounds
-    x = random(0, SCREEN_WIDTH / size) * size;
-    y = random(0, SCREEN_HEIGHT / size) * size;
+    x = newX;
+    y = newY;
     hitBox->setX(x);
     hitBox->setY(y);
 }

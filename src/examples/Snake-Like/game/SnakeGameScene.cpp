@@ -15,7 +15,7 @@ void SnakeGameScene::update()
     {
         Serial.println("Collision");
         snake->grow();
-        food->respawn();
+        respawnFood();
         score += 1;
     }
     if (displayScore < score * 100)
@@ -67,4 +67,30 @@ void SnakeGameScene::onEnterScene()
     displayScore = 0;
     snake->reset();
     food->reset();
+}
+
+void SnakeGameScene::respawnFood()
+{
+    int foodX, foodY;
+    bool validPosition = false;
+
+    while (!validPosition)
+    {
+        // Generate random coordinates within the arena
+        foodX = 1 + random(arenaX, arenaX + arenaWidth - food->getSize());
+        foodY = 1 + random(arenaY, arenaY + arenaHeight - 1 - food->getSize());
+        food->respawn(foodX, foodY);
+        // Check if the generated coordinates overlap with the snake
+        validPosition = true;
+        for (SnakeSegment *segment : snake->getSegments())
+        {
+            if (collisionDetector->checkCollision(food, segment))
+            {
+                validPosition = false;
+                break; // Break out of the loop if there's a collision
+            }
+        }
+    }
+
+    // Set the food's position to the valid coordinates
 }

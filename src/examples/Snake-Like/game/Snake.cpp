@@ -33,12 +33,12 @@ void Snake::update()
         directionX = -1;
         directionY = 0;
     }
-    else if (inputManager->getInputValue("Y axis") > 2000 && directionY != -1)
+    else if (inputManager->getInputValue("Y axis") > 2100 && directionY != -1)
     {
         directionX = 0;
         directionY = 1;
     }
-    else if (inputManager->getInputValue("Y axis") < 1900 && directionY != 1)
+    else if (inputManager->getInputValue("Y axis") < 1800 && directionY != 1)
     {
         directionX = 0;
         directionY = -1;
