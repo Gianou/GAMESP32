@@ -16,16 +16,12 @@ void SnakeEndUI::update()
 void SnakeEndUI::render(Adafruit_SSD1325 &display)
 {
     display.clearDisplay();
-    display.setCursor(10, 20);
+    display.setCursor(10, 10);
     display.print("Game Over!");
-    display.setCursor(10, 35);
+    display.setCursor(10, 25);
     display.print("Score: ");
-    // display.print(finalScore);
+    // display.print(scoreHandler->getScore() * 100);
+    display.print(scoreHandler->getDisplayScore());
     display.setCursor(10, 50);
-    display.print("Press Start to Retry");
-}
-
-void SnakeEndUI::setFinalScore(int score)
-{
-    finalScore = score;
+    display.print("Start to Retry");
 }

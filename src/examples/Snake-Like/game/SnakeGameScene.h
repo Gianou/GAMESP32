@@ -6,6 +6,7 @@
 #include "../../../game_engine/CollisionDetector.h"
 #include "Food.h"
 #include "Snake.h"
+#include "SnakeScoreHandler.h"
 
 class SnakeGameScene : public GameScene
 {
@@ -18,6 +19,7 @@ public:
     CollisionDetector *getCollisionDetector();
     void setSnake(Snake *newSnake) { snake = newSnake; };
     void setFood(Food *newFood) { food = newFood; };
+    void setScoreHandler(SnakeScoreHandler *newScoreHandler) { scoreHandler = newScoreHandler; };
     void respawnFood();
 
     void
@@ -26,6 +28,7 @@ public:
 private:
     Snake *snake;
     Food *food;
+    SnakeScoreHandler *scoreHandler;
     int score, displayScore;
     int arenaX, arenaY, arenaWidth, arenaHeight;
     CollisionDetector *collisionDetector;

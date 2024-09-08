@@ -15,6 +15,8 @@
 #include "src/examples/Snake-Like/game/Snake.h"
 #include "src/examples/Snake-Like/game/Food.h"
 #include "src/examples/Snake-Like/game/SnakeGameScene.h"
+#include "src/examples/Snake-Like/game/SnakeScoreHandler.h"
+#include "src/examples/Snake-Like/ui/SnakeEndScene.h"
 #include "src/examples/Snake-Like/ui/SnakeStartUI.h"
 #include "src/examples/Snake-Like/ui/SnakeEndUI.h"
 
@@ -37,7 +39,7 @@ int arenaY = 10;
 // Initialize scenes
 SnakeGameScene snakeGameScene = SnakeGameScene("Snake Game", arenaX, arenaY, 115, 50);
 GameScene startMenuGameScene = GameScene("Start");
-GameScene endMenuGameScene = GameScene("End");
+SnakeEndScene endMenuGameScene = SnakeEndScene("End");
 SnakeStartUI startUI = SnakeStartUI();
 SnakeEndUI endUI = SnakeEndUI();
 
@@ -48,6 +50,7 @@ SceneManager *sceneManager = SceneManager::getInstance();
 // Initialize game objects
 Snake snake = Snake(25, 17, 3, 6, 12); // Start with length 1
 Food food = Food(40, 38, 3);           // Initial food position
+SnakeScoreHandler scoreHandler = SnakeScoreHandler();
 // Food food = Food(arenaX + 1, arenaY + 1, 3); // Initial food position
 
 void setup()
@@ -62,6 +65,8 @@ void setup()
     snakeGameScene.addGameObject(&food);
     snakeGameScene.setSnake(&snake);
     snakeGameScene.setFood(&food);
+    snakeGameScene.setScoreHandler(&scoreHandler);
+    endUI.setScoreHandler(&scoreHandler);
 
     // Add all the game objects to startMenuGameScene
     startMenuGameScene.addGameObject(&startUI);
