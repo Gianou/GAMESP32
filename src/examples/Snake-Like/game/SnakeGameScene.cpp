@@ -18,14 +18,7 @@ void SnakeGameScene::update()
         respawnFood();
         scoreHandler->setScore(scoreHandler->getScore() + 1);
     }
-    // if (displayScore < score * 100)
-    // {
-    //     displayScore += 3;
-    //     if (displayScore > score * 100)
-    //     {
-    //         displayScore = score * 100;
-    //     }
-    // }
+
     // Check if snake goes out of bound
     if (
         snake->getHead()->getX() < arenaX ||
@@ -58,6 +51,10 @@ void SnakeGameScene::render(Adafruit_SSD1325 &display)
     display.setCursor(0, 0);
     display.print("Score: ");
     display.print(scoreHandler->getDisplayScore());
+    // Show wifi connexion
+    NetworkManager *networkManager = NetworkManager::getInstance();
+    display.setCursor(64, 0);
+    display.print(networkManager->getConnectionQuality());
 }
 
 void SnakeGameScene::onEnterScene()

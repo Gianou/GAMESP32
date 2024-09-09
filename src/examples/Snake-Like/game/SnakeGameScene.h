@@ -2,8 +2,9 @@
 #define SNAKE_GAME_SCENE_H
 
 #include "../../../game_engine/GameScene.h"
-#include "../../../managers/SceneManager.h"
 #include "../../../game_engine/CollisionDetector.h"
+#include "../../../managers/SceneManager.h"
+#include "../../../managers/NetworkManager.h"
 #include "Food.h"
 #include "Snake.h"
 #include "SnakeScoreHandler.h"

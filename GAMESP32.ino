@@ -3,11 +3,13 @@
 #include <Adafruit_GFX.h>
 
 #include "config/Constants.h"
+#include "config/NetworkConstants.h"
 
 #include "src/components/Button.h"
 #include "src/components/JoystickAxis.h"
 #include "src/managers/InputManager.h"
 #include "src/managers/SceneManager.h"
+#include "src/managers/NetworkManager.h"
 #include "src/game_engine/RenderEngine.h"
 #include "src/game_engine/GameEngine.h"
 #include "src/game_engine/GameScene.h"
@@ -56,6 +58,11 @@ SnakeScoreHandler scoreHandler = SnakeScoreHandler();
 void setup()
 {
     Serial.begin(115200);
+
+    // Connect to WiFi
+    NetworkManager *networkManager = NetworkManager::getInstance();
+    networkManager->setCredentials(ssid, password);
+    networkManager->connectToWiFi();
 
     // Add all the inputs to the InputManager
     inputManager->addInputs({&buttonA, &buttonB, &buttonSW, &xAxis, &yAxis});
