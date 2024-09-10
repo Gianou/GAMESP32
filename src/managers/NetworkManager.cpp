@@ -1,5 +1,11 @@
 #include "NetworkManager.h"
 
+#include "addons/TokenHelper.h"
+#include "addons/RTDBHelper.h"
+
+FirebaseConfig config;
+FirebaseAuth auth;
+
 NetworkManager::NetworkManager()
 {
 }
@@ -20,6 +26,12 @@ void NetworkManager::setCredentials(const char *wifi_ssid, const char *wifi_pass
 {
     ssid = wifi_ssid;
     password = wifi_password;
+}
+void NetworkManager::setFirebaseCredentials(const char *apiKey, const char *databaseUrl, const char *projectId)
+{
+    _apiKey = apiKey;
+    _databaseUrl = databaseUrl;
+    _projectId = projectId;
 }
 
 void NetworkManager::connectToWiFi()
@@ -56,6 +68,46 @@ void NetworkManager::connectToWiFi()
     {
         Serial.println("Already connected to WiFi");
     }
+}
+
+void NetworkManager::connectToFirebase()
+{
+    config.api_key = _apiKey;
+    config.database_url = _databaseUrl;
+
+    config.token_status_callback = tokenStatusCallback;
+
+    if (Firebase.signUp(&config, &auth, "", ""))
+    {
+        Serial.println("Anonymous sign-in successful");
+    }
+    else
+    {
+        Serial.printf("Sign-in error: %s\n", config.signer.signupError.message.c_str());
+    }
+
+    Firebase.begin(&config, &auth);
+    Firebase.reconnectWiFi(true);
+
+    // Create a document in Firestore
+    String jsonPayload = "{\"name\":\"John Doe\", \"age\":30}";
+    createFirestoreDocument();
+}
+
+void NetworkManager::createFirestoreDocument()
+{
+    FirebaseData fbdo;
+    FirebaseJson content;
+
+    content.set("fields/player/stringValue", "DVD");
+    content.set("fields/score/integerValue", 400);
+
+    Serial.print("Create document... ");
+
+    if (Firebase.Firestore.createDocument(&fbdo, _projectId, "", "scoreboard", content.raw()))
+        Serial.printf("ok\n%s\n\n", fbdo.payload().c_str());
+    else
+        Serial.println(fbdo.errorReason());
 }
 
 // Check WiFi connection status

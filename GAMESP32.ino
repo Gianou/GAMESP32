@@ -62,7 +62,9 @@ void setup()
     // Connect to WiFi
     NetworkManager *networkManager = NetworkManager::getInstance();
     networkManager->setCredentials(ssid, password);
+    networkManager->setFirebaseCredentials(apiKey, databaseUrl, projectId);
     networkManager->connectToWiFi();
+    networkManager->connectToFirebase();
 
     // Add all the inputs to the InputManager
     inputManager->addInputs({&buttonA, &buttonB, &buttonSW, &xAxis, &yAxis});
