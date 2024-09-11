@@ -88,21 +88,17 @@ void NetworkManager::connectToFirebase()
 
     Firebase.begin(&config, &auth);
     Firebase.reconnectWiFi(true);
-
-    // Create a document in Firestore
-    String jsonPayload = "{\"name\":\"John Doe\", \"age\":30}";
-    createFirestoreDocument();
 }
 
-void NetworkManager::createFirestoreDocument()
+void NetworkManager::saveScoreFirestore(String username, int score)
 {
     FirebaseData fbdo;
     FirebaseJson content;
 
-    content.set("fields/player/stringValue", "DVD");
-    content.set("fields/score/integerValue", 400);
+    content.set("fields/player/stringValue", username);
+    content.set("fields/score/integerValue", score);
 
-    Serial.print("Create document... ");
+    Serial.print("Saving score... ");
 
     if (Firebase.Firestore.createDocument(&fbdo, _projectId, "", "scoreboard", content.raw()))
         Serial.printf("ok\n%s\n\n", fbdo.payload().c_str());

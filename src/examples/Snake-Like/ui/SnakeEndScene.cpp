@@ -3,3 +3,7 @@
 SnakeEndScene::SnakeEndScene(String name) : GameScene(name)
 {
 }
+
+void SnakeEndScene::onEnterScene()
+{
+}

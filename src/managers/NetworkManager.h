@@ -22,7 +22,7 @@ public:
     getInstance();
     void connectToWiFi();
     void connectToFirebase();
-    void createFirestoreDocument();
+    void saveScoreFirestore(String username, int score);
     bool isConnected();
     void setCredentials(const char *wifi_ssid, const char *wifi_password);
     void setFirebaseCredentials(const char *apiKey, const char *databaseUrl, const char *projectId);
