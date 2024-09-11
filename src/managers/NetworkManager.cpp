@@ -38,9 +38,7 @@ void NetworkManager::connectToWiFi()
 {
     delay(1000);
     Serial.print("SSID: ");
-    Serial.println(ssid); // Should print the correct SSID
-    Serial.print("Password: ");
-    Serial.println(password);
+    Serial.println(ssid);
     // Check if SSID and password are valid
     if (ssid == nullptr || password == nullptr || strlen(ssid) == 0 || strlen(password) == 0)
     {
@@ -126,33 +124,29 @@ int NetworkManager::getSignalStrength()
     }
 }
 
-// Get connection quality in human-readable form
-String NetworkManager::getConnectionQuality()
+// Get connection quality as an integer (0-3)
+int NetworkManager::getConnectionQuality()
 {
     int rssi = getSignalStrength();
 
     if (rssi == 0)
     {
-        return "No signal";
+        return 0; // No signal
     }
     else if (rssi >= -50)
     {
-        return "Excellent";
+        return 3; // Excellent
     }
     else if (rssi >= -60)
     {
-        return "Good";
-    }
-    else if (rssi >= -70)
-    {
-        return "Fair";
+        return 2; // Good
     }
     else if (rssi >= -80)
     {
-        return "Weak";
+        return 1; // Fair/Weak
     }
     else
     {
-        return "Very weak";
+        return 0; // Very weak
     }
 }

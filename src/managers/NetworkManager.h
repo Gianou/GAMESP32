@@ -26,7 +26,7 @@ public:
     bool isConnected();
     void setCredentials(const char *wifi_ssid, const char *wifi_password);
     void setFirebaseCredentials(const char *apiKey, const char *databaseUrl, const char *projectId);
-    String getConnectionQuality();
+    int getConnectionQuality();
 };
 
 #endif

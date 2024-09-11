@@ -33,6 +33,7 @@ private:
     int score, displayScore;
     int arenaX, arenaY, arenaWidth, arenaHeight;
     CollisionDetector *collisionDetector;
+    void drawConnectionQualityBar(int quality, Adafruit_SSD1325 &display);
 };
 
 #endif

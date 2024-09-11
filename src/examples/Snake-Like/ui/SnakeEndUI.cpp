@@ -32,7 +32,7 @@ void SnakeEndUI::render(Adafruit_SSD1325 &display)
     display.print(scoreHandler->getDisplayScore());
 
     // Display player name input section
-    display.setCursor(10, 36);
+    display.setCursor(10, 40);
     display.print("Name: ");
 
     // Display each letter with an underscore or brackets for selection
@@ -42,15 +42,15 @@ void SnakeEndUI::render(Adafruit_SSD1325 &display)
         if (menuSelection == i)
         {
             // Highlight the current letter
-            display.print(" (");
+            display.print("  |");
             display.print(playerName[i]);
-            display.print(") ");
+            display.print("|  ");
         }
         else
         {
-            display.print(" ");
+            display.print("   ");
             display.print(playerName[i]);
-            display.print(" ");
+            display.print("   ");
         }
     }
 
@@ -77,20 +77,33 @@ void SnakeEndUI::handleInput(InputManager *inputManager, SceneManager *sceneMana
     int xInput = inputManager->getInputValue("X axis");
     int yInput = inputManager->getInputValue("Y axis");
 
-    // Navigate left/right
-    if (xInput > 3000)
+    // Define a small threshold for the joystick to be considered "centered"
+    const int centerThreshold = 2000; // Close to neutral (centered)
+
+    static bool xAxisMoved = false; // Track whether the X axis was moved
+
+    // Handle X axis (left/right) movement
+    if (xInput > 3000 && !xAxisMoved)
     {
         if (menuSelection < 4)
             menuSelection++; // Move right
+        xAxisMoved = true;   // Mark that the X axis was moved
     }
-    else if (xInput < 1000)
+    else if (xInput < 1000 && !xAxisMoved)
     {
         if (menuSelection > 0)
             menuSelection--; // Move left
+        xAxisMoved = true;   // Mark that the X axis was moved
     }
 
-    // Change letter or navigate up/down in the menu
-    if (yInput > 3000)
+    // Reset xAxisMoved when joystick returns to the center
+    if (xInput >= 1000 && xInput <= 3000)
+    {
+        xAxisMoved = false; // Joystick is centered again
+    }
+
+    // Handle Y axis (up/down) movement for letter change
+    if (yInput > 3800)
     {
         if (menuSelection < 3)
         {
@@ -105,7 +118,7 @@ void SnakeEndUI::handleInput(InputManager *inputManager, SceneManager *sceneMana
             }
         }
     }
-    else if (yInput < 1000)
+    else if (yInput < 200)
     {
         if (menuSelection < 3)
         {
@@ -121,7 +134,7 @@ void SnakeEndUI::handleInput(InputManager *inputManager, SceneManager *sceneMana
         }
     }
 
-    // Select action (Save or Cancel) when Button A is pressed
+    // Select action (Save or Cancel) when Button B is pressed
     if (!inputManager->getInputValue("Button B"))
     {
         if (menuSelection == 3)

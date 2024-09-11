@@ -51,10 +51,12 @@ void SnakeGameScene::render(Adafruit_SSD1325 &display)
     display.setCursor(0, 0);
     display.print("Score: ");
     display.print(scoreHandler->getDisplayScore());
+
     // Show wifi connexion
     NetworkManager *networkManager = NetworkManager::getInstance();
-    display.setCursor(64, 0);
-    display.print(networkManager->getConnectionQuality());
+    int connectionQuality = networkManager->getConnectionQuality();
+
+    drawConnectionQualityBar(connectionQuality, display);
 }
 
 void SnakeGameScene::onEnterScene()
@@ -91,4 +93,26 @@ void SnakeGameScene::respawnFood()
     }
 
     // Set the food's position to the valid coordinates
+}
+
+void SnakeGameScene::drawConnectionQualityBar(int quality, Adafruit_SSD1325 &display)
+{
+    int barWidth = 3;         // Width of each bar segment
+    int barHeight = 4;        // Height of each bar segment
+    int spaceBetweenBars = 1; // Space between bars
+    int xStart = 96;          // X position to start drawing
+    int yStart = 5;           // Y position to start drawing
+
+    // Draw bars based on connection quality
+    for (int i = 0; i < 4; i++)
+    {
+        if (i < quality)
+        {
+            display.fillRect(xStart + i * (barWidth + spaceBetweenBars), yStart - i, barWidth, barHeight + i, WHITE); // Filled bar
+        }
+        else
+        {
+            display.drawRect(xStart + i * (barWidth + spaceBetweenBars), yStart - i, barWidth, barHeight + i, WHITE); // Empty bar
+        }
+    }
 }
