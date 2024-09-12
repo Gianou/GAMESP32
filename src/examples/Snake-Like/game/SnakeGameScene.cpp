@@ -1,49 +1,53 @@
 #include "SnakeGameScene.h"
 
 SnakeGameScene::SnakeGameScene(String name, int x, int y, int width, int height)
-    : GameScene(name), arenaX(x), arenaY(y), arenaWidth(width), arenaHeight(height), score(0)
+    : GameScene(name), arenaX(x), arenaY(y), arenaWidth(width), arenaHeight(height), score(0),
+      frameCounter(0), frameInterval(6) // Initialize frameCounter
 {
     collisionDetector = new CollisionDetector();
 }
 
 void SnakeGameScene::update()
 {
-    GameScene::update();
+    frameCounter++;
 
-    // Check collision between snake and food
-    if (collisionDetector->checkCollision(snake->getHead(), food))
+    if (frameCounter % frameInterval == 0) // Check if it's time to update
     {
-        Serial.println("Collision");
-        snake->grow();
-        respawnFood();
-        scoreHandler->setScore(scoreHandler->getScore() + 1);
+        GameScene::update();
+
+        // Check collision between snake and food
+        if (collisionDetector->checkCollision(snake->getHead(), food))
+        {
+            Serial.println("Collision");
+            snake->grow();
+            respawnFood();
+            scoreHandler->setScore(scoreHandler->getScore() + 1);
+            if (scoreHandler->getScore() % 3 == 0)
+            {
+                frameInterval--;
+                if (frameInterval <= 0)
+                {
+                    frameInterval = 1;
+                }
+            }
+        }
+
+        // Check if snake goes out of bounds
+        if (
+            snake->getHead()->getX() < arenaX ||
+            snake->getHead()->getX() + snake->getHead()->getSize() > arenaX + arenaWidth ||
+            snake->getHead()->getY() < arenaY ||
+            snake->getHead()->getY() + snake->getHead()->getSize() > arenaY + arenaHeight)
+        {
+            snake->endGame();
+        }
     }
-
-    // Check if snake goes out of bound
-    if (
-        snake->getHead()->getX() < arenaX ||
-        snake->getHead()->getX() + snake->getHead()->getSize() > arenaX + arenaWidth ||
-        snake->getHead()->getY() < arenaY ||
-        snake->getHead()->getY() + snake->getHead()->getSize() > arenaY + arenaHeight)
-    {
-        snake->endGame();
-    }
-}
-
-CollisionDetector *SnakeGameScene::getCollisionDetector()
-{
-    return collisionDetector;
-}
-
-void SnakeGameScene::endGame()
-{
-    SceneManager *sceneManager = SceneManager::getInstance();
-    sceneManager->setCurrentGameScene("End");
 }
 
 void SnakeGameScene::render(Adafruit_SSD1325 &display)
 {
     GameScene::render(display);
+
     // Draw arena
     display.drawRect(arenaX, arenaY, arenaWidth, arenaHeight, WHITE);
     // Render the score
@@ -52,7 +56,7 @@ void SnakeGameScene::render(Adafruit_SSD1325 &display)
     display.print("Score: ");
     display.print(scoreHandler->getDisplayScore());
 
-    // Show wifi connexion
+    // Show WiFi connection
     NetworkManager *networkManager = NetworkManager::getInstance();
     int connectionQuality = networkManager->getConnectionQuality();
 
@@ -67,6 +71,8 @@ void SnakeGameScene::onEnterScene()
     snake->reset();
     food->reset();
     scoreHandler->reset();
+    frameCounter = 0; // Reset frame counter when entering the scene
+    frameInterval = 3;
 }
 
 void SnakeGameScene::respawnFood()

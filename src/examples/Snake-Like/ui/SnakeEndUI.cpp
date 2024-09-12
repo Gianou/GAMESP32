@@ -38,19 +38,19 @@ void SnakeEndUI::render(Adafruit_SSD1325 &display)
     // Display each letter with an underscore or brackets for selection
     for (int i = 0; i < 3; i++)
     {
-        display.setCursor(40 + (i * 10), 40);
+        display.setCursor(46 + (i * 14), 40);
         if (menuSelection == i)
         {
             // Highlight the current letter
-            display.print("  |");
+            display.print("|");
             display.print(playerName[i]);
-            display.print("|  ");
+            display.print("|");
         }
         else
         {
-            display.print("   ");
+            display.print(" ");
             display.print(playerName[i]);
-            display.print("   ");
+            display.print(" ");
         }
     }
 

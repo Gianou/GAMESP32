@@ -32,6 +32,7 @@ private:
     SnakeScoreHandler *scoreHandler;
     int score, displayScore;
     int arenaX, arenaY, arenaWidth, arenaHeight;
+    int frameCounter, frameInterval;
     CollisionDetector *collisionDetector;
     void drawConnectionQualityBar(int quality, Adafruit_SSD1325 &display);
 };
